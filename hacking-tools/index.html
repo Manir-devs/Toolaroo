@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Tools Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen p-6">
+
+  <h1 class="text-3xl font-bold mb-6 text-center">Hacking Tools Vault</h1>
+
+  <!-- Search Bar -->
+  <div class="max-w-xl mx-auto mb-6">
+    <input type="text" id="searchInput" onkeyup="searchTools()" placeholder="Search tools..."
+      class="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+  </div>
+
+  <div id="toolsList" class="space-y-4 max-w-xl mx-auto">
+
+    <!-- Tool 1 -->
+    <div class="tool bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+      <button onclick="toggleDrawer('tool1')" class="w-full text-left px-4 py-3 font-semibold hover:bg-gray-700">
+        Tool 1 - Network Sniffer
+      </button>
+      <div id="tool1" class="hidden px-4 py-3 border-t border-gray-700">
+        <p class="mb-3">A tool to sniff packets from local network.</p>
+        <div class="space-x-2">
+          <a href="your-direct-link-1" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Download</a>
+          <a href="your-gdrive-link-1" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Google Drive</a>
+          <a href="your-telegram-link-1" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Telegram</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 2 -->
+    <div class="tool bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+      <button onclick="toggleDrawer('tool2')" class="w-full text-left px-4 py-3 font-semibold hover:bg-gray-700">
+        Tool 2 - WiFi Cracker
+      </button>
+      <div id="tool2" class="hidden px-4 py-3 border-t border-gray-700">
+        <p class="mb-3">Try weak password combos on WiFi routers (for educational use only).</p>
+        <div class="space-x-2">
+          <a href="your-direct-link-2" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Download</a>
+          <a href="your-gdrive-link-2" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Google Drive</a>
+          <a href="your-telegram-link-2" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded">Telegram</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add more tools below as needed -->
+
+  </div>
+
+  <script>
+    function toggleDrawer(id) {
+      const drawer = document.getElementById(id);
+      drawer.classList.toggle('hidden');
+    }
+
+    function searchTools() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const tools = document.getElementsByClassName('tool');
+
+      for (let i = 0; i < tools.length; i++) {
+        const btn = tools[i].getElementsByTagName('button')[0];
+        const txtValue = btn.textContent || btn.innerText;
+        tools[i].style.display = txtValue.toLowerCase().includes(input) ? '' : 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>

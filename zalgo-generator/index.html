@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary Meta Tags -->
+<title>Glitch Text Generator - Glitch & Corrupt Text Online | Toolaroo</title>
+<meta name="title" content="Glitch Text Generator - Glitch & Corrupt Text Online | Toolaroo" />
+<meta name="description" content="Create glitched, cursed Zalgo text instantly with Toolaroo’s free generator. Type your text, adjust the glitch intensity, and copy the result — no ads, no clutter!" />
+<meta name="keywords" content="zalgo text generator, glitch text, cursed text generator, creepy text, glitchy letters, toolaroo zalgo, online zalgo, glitch effect text, glitch generator, weird font, fancy cursed text, corrupt text, manir zalgo, manirbhaii tool, zalgo effect, glitch intensity, copy zalgo, zalgo maker, weird glitch font, cursed font generator, toolaroo tools" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/zalgo-generator/index.html" />
+<meta property="og:title" content="Zalgo Text Generator - Glitch & Corrupt Text Online | Toolaroo" />
+<meta property="og:description" content="Toolaroo's Zalgo Generator lets you glitch text in real-time with a clean interface and adjustable intensity. Just type, glitch, and copy!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/zalgo-generator-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/zalgo-generator/index.html" />
+<meta name="twitter:title" content="Zalgo Text Generator - Glitch & Corrupt Text Online | Toolaroo" />
+<meta name="twitter:description" content="Glitch your text like a pro with Toolaroo’s Zalgo Generator. Easy UI, instant effect, and one-click copy — no login needed!" />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/zalgo-generator-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+<link rel="canonical" href="https://toolaroo.free.nf/zalgo-generator/index.html" />
+    <style>
+        * {
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f4f4f4;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        header {
+            width: 100%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+        .zalgo-container {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #zalgoInput {
+            width: 95%;
+            max-width: 500px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #0ff;
+            color:blue;
+            font-size: 1em;
+            margin: 10px 0;
+            border-radius: 4px;
+            resize: none;
+            outline: none;
+            transition: border 0.2s;
+            overflow-y: hidden;
+        }
+        #customZalgoIntensity {
+            width: 60px;
+            
+            padding: 5px;
+            background: #000;
+            border: 1px solid #0f0;
+            color: white;
+            font-size: 1em;
+            margin-left: 10px;
+            border-radius: 4px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        #zalgoInput {
+            min-height: 3em;
+        }
+        .output-container {
+            
+            width: 95%;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        #zalgoOutput {
+            flex: 1;
+            background: #fff;
+            color: #0a0;
+            padding: 10px;
+            min-height: 1.5em;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            border: 1px solid #0f0;
+            border-radius: 4px;
+            font-size: 1.1em;
+        }
+        #zalgoButton {
+            margin-left: 10px;
+            background: #0f0;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #zalgoButton:hover {
+            background: #0cc;
+        }
+        #zalgoIntensity {
+            flex: 1;
+            accent-color: #0ff;
+        }
+        .intensity-container {
+            width: 95%;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        label {
+            margin-top: 20px;
+        }
+        /* Dark Theme for Zalgo Text Generator */
+        body.dark-mode .zalgo-container textarea,
+        body.dark-mode .zalgo-container input[type="number"] {
+            background: #222;
+            border: 1px solid #0f0;
+            color: #0f0;
+        }
+        body.dark-mode .zalgo-container #zalgoInput {
+            background: #000;
+            color:#0f0;
+        }
+        body.dark-mode .zalgo-container #zalgoOutput {
+            background: #000;
+            border: 1px solid #0f0;
+            color: #0f0;
+        }
+        body.dark-mode .zalgo-container #zalgoButton {
+            background: #0f0;
+            color: #000;
+        }
+        body.dark-mode .zalgo-container #zalgoButton:hover {
+            background: #0cc;
+            color: #000;
+        }
+        body.dark-mode .zalgo-container input[type="range"] {
+            accent-color: #0f0;
+            
+        }
+        body.dark-mode .zalgo-container label {
+            color: #0f0;
+        }
+        
+        /* Cool Slider Style */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #0ff 0%, #0cc 100%);
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #00ffff;
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #0ff;
+    transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #00ffff;
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #0ff;
+    transform: scale(1.2);
+}
+
+/* Dark Mode Slider */
+body.dark-mode input[type="range"] {
+    background: linear-gradient(90deg, #0f0 0%, #090 100%);
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-thumb {
+    background: #0f0;
+    border: 2px solid #fff;
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-thumb:hover {
+    background: #4f4;
+}
+
+body.dark-mode input[type="range"]::-moz-range-thumb {
+    background: #0f0;
+    border: 2px solid #fff;
+}
+
+body.dark-mode input[type="range"]::-moz-range-thumb:hover {
+    background: #4f4;
+}
+
+
+
+
+
+
+
+
+        
+        
+        
+           /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/zalgo-generator.png" alt="Logo">
+            Zalgo generator
+        </div>
+        
+                <div class="right-header">
+                    <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  
+  font-size: 24px; 
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+        
+        <div class="right-header">
+            <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        <a href="#" onclick="openContact()">Contact</a>
+    </div>
+
+
+<br>
+    
+<!--ad start 320 100-->    
+    
+    
+    
+    
+
+
+
+
+    
+
+
+
+
+
+
+<!--ad end-->
+
+
+
+    
+    
+
+
+    <!-- Zalgo Text Generator -->
+    <div class="zalgo-container">
+        <textarea id="zalgoInput" rows="2" placeholder="Type something..."></textarea>
+        <div class="output-container">
+            <div id="zalgoOutput" class="output-box"></div>
+            <button id="zalgoButton" onclick="copyText()">Copy</button>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <div class="intensity-container">
+            <label for="zalgoIntensity"></label>
+            <input type="range" min="1" max="100" value="10" id="zalgoIntensity" />
+            <input type="number" id="customZalgoIntensity" placeholder="Custom" style="font-size:12px;" min="1" max="10000" />
+        </div>
+        
+    </div>
+    <p style="font-size: 12px; color: gray; margin-top: 5px; text-align: left; width: 95%; max-width: 500px;">
+    Need more intensity? Enter a custom value in the black box on the right (max: 10000).
+</p>
+    
+
+    <script>
+        // Template Functions
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.innerText = "☀️";
+            } else {
+                icon.innerText = "🌙";
+            }
+        }
+
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+
+        // Zalgo Text Generator Functions
+        const zalgoInput = document.getElementById("zalgoInput");
+        const zalgoOutput = document.getElementById("zalgoOutput");
+        const zalgoIntensity = document.getElementById("zalgoIntensity");
+        const customZalgoIntensity = document.getElementById("customZalgoIntensity");
+
+        const zalgo_up = [..."̍̎̄̅̿̑̆̐͒͗̓̋̏̽͆͊͋͌̃̂̌̀́̾̿̑̓̿̇̒"];
+        const zalgo_mid = [..."̡̢̨̛̬̀̕͝͞͠"];
+        const zalgo_down = [..."̖̗̘̙̜̝̞̟̠̤̥̦̩̪̫̬̮̯̰̱̲̳̹̺̻"];
+
+        function zalgo(text, intensity) {
+            return text.split("").map(char => {
+                let newChar = char;
+                for (let i = 0; i < intensity; i++) {
+                    if (Math.random() < 0.5) newChar += zalgo_up[Math.floor(Math.random() * zalgo_up.length)];
+                    if (Math.random() < 0.5) newChar += zalgo_mid[Math.floor(Math.random() * zalgo_mid.length)];
+                    if (Math.random() < 0.5) newChar += zalgo_down[Math.floor(Math.random() * zalgo_down.length)];
+                }
+                return newChar;
+            }).join("");
+        }
+
+        function updateOutput() {
+            const text = zalgoInput.value;
+            let intensity = parseInt(customZalgoIntensity.value) || parseInt(zalgoIntensity.value);
+            intensity = Math.min(intensity, 10000);
+            customZalgoIntensity.value = intensity;
+            zalgoOutput.innerText = zalgo(text, intensity);
+            autoResize(zalgoInput);
+            autoResizeOutput();
+        }
+
+        function copyText() {
+            const temp = document.createElement("textarea");
+            temp.value = zalgoOutput.innerText;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+        }
+
+        function autoResize(textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
+        }
+
+        function autoResizeOutput() {
+            zalgoOutput.style.height = "auto";
+            zalgoOutput.style.height = zalgoOutput.scrollHeight + "px";
+        }
+
+        zalgoInput.addEventListener("input", updateOutput);
+
+        zalgoIntensity.addEventListener("input", () => {
+            customZalgoIntensity.value = "";
+            customZalgoIntensity.classList.remove("invalid");
+            updateOutput();
+        });
+
+        customZalgoIntensity.addEventListener("input", () => {
+            let val = parseInt(customZalgoIntensity.value);
+
+            if (isNaN(val) || val < 1 || val > 10000) {
+                customZalgoIntensity.classList.add("invalid");
+                if (val > 10000) customZalgoIntensity.value = 10000;
+            } else {
+                customZalgoIntensity.classList.remove("invalid");
+                updateOutput();
+            }
+
+            if (customZalgoIntensity.value !== "") zalgoIntensity.value = "";
+        });
+
+        window.onload = () => {
+            autoResize(zalgoInput);
+            autoResizeOutput();
+        };
+    </script>
+    
+    
+    
+    
+    
+    <br>
+    
+    
+<!--ad start 320 100-->    
+    
+    
+    
+
+
+
+
+
+
+
+
+   
+
+
+
+<!--ad end-->
+
+
+
+    
+    
+    
+    
+    
+    <div id="zalgo-info" style="max-width: 800px; margin: auto; font-family: sans-serif; line-height: 1.7; padding: 15px;">
+  <h1>Zalgo Generator</h1>
+  <p>Zalgo Text Generator lets you convert normal text into glitched, cursed text using Unicode distortions. It's ideal for creepy messages, aesthetic bios, or just messing with your friends.</p>
+
+  <h2>What is Zalgo Text?</h2>
+  <p>Zalgo text is generated by combining characters with special Unicode diacritics that appear above, below, or through letters. This makes the text look distorted or “haunted”.</p>
+
+  <h2>How to Use</h2>
+  <ul style="list-style-type: disc; padding-left: 20px;">
+    <li>Enter your normal text in the input box.</li>
+    <li>Use the slider to control the glitch intensity.</li>
+    <li>Copy the output using the copy button.</li>
+  </ul>
+
+  <h2>Where to Use It</h2>
+  <ul style="list-style-type: disc; padding-left: 20px;">
+    <li>Discord, Instagram, WhatsApp</li>
+    <li>Horror or glitch-themed projects</li>
+    <li>Username or bio styling</li>
+    <li>Meme captions or spooky content</li>
+  </ul>
+
+  <h2>Why Use This Tool?</h2>
+  <p>It's lightweight, works in real-time, and gives you full control over glitch intensity. No ads, no distractions — just simple Zalgo generation.</p>
+
+  <h2>About the Developer</h2>
+  <p>Made by <strong>Maniruz Zaman</strong> (Manir), creator of <a href="https://toolaroo.free.nf" target="_blank" style="text-decoration: underline;">Toolaroo</a> — a growing collection of useful online tools for daily tasks, fun, and productivity. Please follow me on <a href="https://instagram.com/artistry_with_manir___/">instagram</a>...</p>
+
+  <h2>Extra Tips</h2>
+  <ul style="list-style-type: disc; padding-left: 20px;">
+    <li>Too much glitch can make text unreadable — use with care.</li>
+    <li>Use mild glitch for subtle effects.</li>
+    <li>Zalgo text may not render well on all devices or platforms.</li>
+  </ul>
+
+  <p style="margin-top: 30px; font-size: 0.9em; color: #777;">Zalgo comes... and now your text shall obey.</p>
+</div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            
+    <!--footer-->
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="nbwXkuJrrll9y4Z8_Yk3HhxhkOMNVdD0xunIADAJzmA" />
+    
+    
+    <title>Binary Translator - Convert Text to Binary & Binary to Text | Toolaroo</title>
+
+    <!-- Favicon and Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <meta name="title" content="Binary Translator - Convert Text to Binary & Binary to Text | Toolaroo" />
+<meta name="description" content="Use Toolaroo's Binary Translator to convert text to binary and binary to text instantly. Fast, accurate, and free — copy results in one click!" />
+<meta name="keywords" content="binary translator, text to binary, binary to text, online binary converter, binary tool, free binary translator, copy binary, ascii to binary, binary decoder, binary encoder, toolaroo binary, binary tool by manir, convert binary, binary language, digital text tool, code converter, programming tools, toolaroo tools, binary generator, text converter, manir, manirbhaii, manir website, manir's website" />
+<meta name="author" content="Maniruz Zaman" />
+
+    <!-- Open Graph Meta for Social Sharing -->
+  <meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/binary-translator/index.html" />
+<meta property="og:title" content="Binary Translator - Convert Text to Binary & Binary to Text | Toolaroo" />
+<meta property="og:description" content="Convert text to binary or binary to readable text using Toolaroo's free Binary Translator. No signup needed. Clean interface with instant copy feature!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/binary-translator-preview.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/binary-translator/index.html" />
+<meta name="twitter:title" content="Binary Translator - Convert Text to Binary & Binary to Text | Toolaroo" />
+<meta name="twitter:description" content="Need to translate binary code? Toolaroo's Binary Translator makes it super easy. Convert, view, and copy your result instantly — all free!" />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/binary-translator-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+
+<link rel="canonical" href="https://toolaroo.free.nf/binary-translator/index.html" />
+    
+
+    <!-- External CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    
+    
+    
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Toolaroo Binary Translator",
+  "url": "https://toolaroo.free.nf/binary-translator/index.html",
+  "author": {
+    "@type": "Person",
+    "name": "Maniruz Zaman"
+  },
+  "description": "Convert text to binary and binary to text instantly with Toolaroo's free online binary translator."
+}
+</script>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/toolaroo.png" alt="Logo">
+        </div>
+
+        <div class="right-header">
+            <!-- Share Button -->
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+
+            <!-- Dark Mode Toggle Button -->
+            <button class="icon-btn" id="themeToggleBtn" onclick="toggleDarkMode()">🌙</button>
+
+            <!-- Menu Button for Drawer -->
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <!-- Drawer Menu -->
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        <a href="#" onclick="toggleDarkMode(); toggleDrawer();"> Toggle theme</a>
+        <a href="#" onclick="openStoragePopup(); toggleDrawer();"> Local Storage</a>
+        <a href="#" onclick="reloadPage()">Reload website</a>
+        <a href="../sites/rating.html">Rate me</a>
+        <a href="#" onclick="shareCurrentPage()">Share this page</a>
+        <a href="../sites/FAQs.html">FAQs</a> 
+        <a href="../sites/terms.html">Terms & Conditions</a> 
+        <a href="../sites/privacy.html">Privacy Policy</a> 
+        <a href="../sites/support.html">Support</a>
+        <a href="#" onclick="openContact()">Contact</a>
+    </div>
+<!-- Main Content Area -->
+<div class="main-content">
+
+    <!-- Left Side: Tools Section -->
+    <div class="left-side">
+
+        <!-- Search Bar -->
+<div id="space"></div>
+ <div class="ads" >
+            <h3>Advertisement</h3>
+            
+<iframe data-aa='2390425' src='//ad.a-ads.com/2390425?size=468x60' style='width:100%; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+
+
+
+        </div>
+        <!-- Tool Cards Container -->
+        
+        
+        
+        
+        
+        <div id="mainContainer">
+        <textarea id="inputText" placeholder="Enter text or binary..."></textarea>
+        <br>
+        <button id="buttons" onclick="convertToBinary()">Text to Binary</button>
+        <button id="buttons" onclick="convertToText()">Binary to Text</button>
+        <br><br>
+        <textarea id="outputText" placeholder="Output..." readonly></textarea>
+        <br>
+        <button id="buttons" onclick="copyToClipboard()">Copy Output</button>
+   
+       </div>
+        
+        
+        
+        
+        <div id="localStorageTool">
+  <div id="storagePopup">
+    <div id="storagePopupContent">
+      <h2 style="padding:5px;  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);">LocalStorage Viewer</h2>
+      <button onclick="closeStoragePopup()" style="position:absolute; top:10px; right:10px; font-size:18px;">❌</button>
+      
+      <ul id="storageList">
+          
+      </ul>
+
+      <hr>
+      <h3>Add New Item</h3>
+      <table><tr><td>
+      <select id="newKey" style="">
+        <option>keys</option>
+        <option value="theme">theme</option>
+       
+      </select>
+      </td><td>
+      <input id="newValue" placeholder="Value" style="" />
+      </td><td>
+      <button id="add-button" onclick="addStorageItem()">Add</button>
+      </td>
+      </tr>
+      </table>
+    </div>
+  </div>
+</div>
+        
+        
+        
+        
+        
+
+    </div> <!-- End of Left Side -->
+
+    <!-- Right Side: Info & Ads -->
+    <div class="right-side">
+
+        <!-- Ad Section -->
+        <div class="ads">
+            <h3>Advertisement</h3>
+                        
+<iframe data-aa='2390426' src='//ad.a-ads.com/2390426?size=336x280' style='width:336px; height:280px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+
+        </div>
+<div id="toolaroo-preloader">
+    <img src="../assets/images/preview.png" alt="Loading..." />
+</div>
+        <!-- Info Section -->
+        <div id="infoSection">
+
+            <!-- Welcome Message -->
+            <section>
+                <h1>What is Binary translator?</h1>
+                <p>A Binary Translator is a tool that converts binary code (a series of 0s and 1s) into readable text and vice versa. It's useful for understanding how computers process data and for encoding or decoding information. Toolaroo’s Binary Translator makes this process super fast, easy, and 100% free — no tech skills needed!</p>
+            </section>
+
+<section>
+    <h2>What You Can Do on Binary Translator?</h2>
+    <p>With Toolaroo’s Binary Translator, you can easily</p>
+    <ul>
+        <li><strong>Convert text to binary:</strong>Type your message and get the binary code instantly.</li>
+        <li><strong>Translate binary to text:</strong>Paste any binary code and decode it into readable English.
+It’s quick, simple, and doesn’t require any technical knowledge. Just copy, paste, and go!</li>
+
+    </ul>
+</section>
+
+            <!-- About Toolaroo -->
+            <section>
+                <h2>Why binary translator?</h2>
+                <p>Because binary is the core language of computers — 0s and 1s control everything! Toolaroo’s Binary Translator helps you:</p>
+                <ul>
+                    <li>Understand how data works behind the scenes</li>
+                    <li>Learn the basics of computer language</li>
+                    <li>Encode secret messages in binary (thoda hacker feel!)</li>
+                    <li>Decode binary code quickly without any tech skills</li>
+                    <li>It’s perfect for students, geeks, coders, or just anyone curious about binary!</li>
+                </ul>
+
+                <h2>Explore, Convert, Calculate, Copy — All in One Place!</h2>
+                <p>We’re growing daily. Bookmark us, share with friends, and watch for updates!</p>
+            </section>
+
+            <!-- External Resources -->
+            <section>
+                <h2>Recommended Resources</h2>
+                <p>Check out these top resources:</p>
+                <ul>
+                    <li><a href="https://farmupassam.infy.uk" target="_blank" rel="nofollow">FarmUp Assam - website still in development</a></li>
+                    <li><a href="https://neilpatel.com" target="_blank" rel="nofollow">Neil Patel - Digital Marketing Blog</a></li>
+                    <li><a href="https://backlinko.com" target="_blank" rel="nofollow">Backlinko - SEO Tips & Strategies</a></li>
+                    <li><a href="https://ahrefs.com/blog" target="_blank" rel="nofollow">Ahrefs Blog - SEO & Marketing Guides</a></li>
+                    <li><a href="https://www.semrush.com/blog" target="_blank" rel="nofollow">SEMrush Blog - Marketing Insights</a></li>
+                    <li><a href="https://www.ewebdiscussion.com/forums/web-hosting-offers.67/" target="_blank" rel="nofollow">Web Hosting Offers</a></li>
+                </ul>
+            </section>
+
+        </div> <!-- End Info Section -->
+
+    </div> <!-- End Right Side -->
+
+</div> <!-- End Main Content -->
+    <!-- Footer Section -->
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://youtube.com/@toolaroo?si=KTO1SBb60QX-Q9hO" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/ManirBhaii" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/share/16NxheaJbY/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/Manir-123" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/artistry_with_manir___?igsh=cm5mYXR5ZHl4eTY3" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+</body>
+
+</html>

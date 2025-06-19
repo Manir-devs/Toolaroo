@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <!-- Primary Meta Tags -->
+<title>QR Code Scanner - Scan QR Codes Using Camera | Toolaroo</title>
+<meta name="title" content="QR Code Scanner - Scan QR Codes Using Camera | Toolaroo" />
+<meta name="description" content="Scan QR codes instantly with Toolaroo’s free QR Scanner. Just allow camera access, point to the QR code, and get the result or upload images from your gallery directly. — no app, no login, just fast and simple scanning!" />
+<meta name="keywords" content="qr scanner, qr code scanner, scan qr code, qr reader, toolaroo qr scanner, camera qr scanner, free qr scan tool, online qr code reader, read qr code online, scan and decode qr, qr tools by manir, toolaroo tools, toolaroo scan, web qr scanner, instant qr code scan, decode qr, scan from camera, fast qr code scanner, manirbhaii qr tools" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/qr-scanner/index.html" />
+<meta property="og:title" content="QR Code Scanner - Scan QR Codes Using Camera | Toolaroo" />
+<meta property="og:description" content="Use your camera to scan QR codes instantly with Toolaroo’s fast and lightweight QR scanner tool. 100% free and private." />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/qr-scanner-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/qr-scanner/index.html" />
+<meta name="twitter:title" content="QR Code Scanner - Scan QR Codes Using Camera | Toolaroo" />
+<meta name="twitter:description" content="Scan QR codes easily using your camera. Toolaroo’s QR scanner is fast, secure, and works directly in your browser with no installation." />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/qr-scanner-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+
+<link rel="canonical" href="https://toolaroo.free.nf/qr-scanner/index.html" />
+    
+    
+    
+    <title>Toolaroo QR Scanner</title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f4f4f4;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        header {
+            width: 100%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 1000; /* Ensure header is always on top */
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+            z-index: 1001; /* Ensure drawer is above everything */
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+        /* QR Scanner Styling */
+        #reader {
+            width: 320px;
+            max-width: 100%;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            transition: background 0.3s, color 0.3s;
+            z-index: 1; /* Ensure it's behind the drawer */
+        }
+        body.dark-mode #reader {
+            background: #222;
+            color: white;
+        }
+        .result-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 300px;
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, color 0.3s;
+            z-index: 1; /* Ensure it's behind the drawer */
+        }
+        body.dark-mode .result-box {
+            background: #222;
+            color: white;
+        }
+        #result {
+            flex: 1;
+            overflow-x: auto;
+            white-space: nowrap;
+            font-size: 16px;
+            padding-right: 10px;
+        }
+        button {
+            border: none;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+                
+   /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/qr scan.png" alt="qr scanner">
+            QR Scanner
+        </div>
+        <div class="right-header">
+                    
+   <!--share btn-->     
+        <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  font-size: 24px; 
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+            <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        
+        <a href="#" onclick="openContact()">Contact</a>
+    </div><br>
+    
+    
+    <!-- ad start 320 100-->
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+<!--ad end-->
+
+
+
+    <!-- QR Scanner Section -->
+    <div id="reader"></div>
+    <div class="result-box">
+        <span id="result">Scan a QR code...</span>
+        <button onclick="copyText()">Copy</button>
+    </div>
+
+    <script>
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.innerText = "☀️";  
+            } else {
+                icon.innerText = "🌙";  
+            }
+        }
+
+
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+
+        function onScanSuccess(decodedText) {
+            document.getElementById("result").innerText = decodedText;
+        }
+
+        function onScanFailure(error) {
+            console.warn(error);
+        }
+
+        function copyText() {
+            let text = document.getElementById("result").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied to clipboard!");
+            });
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
+    
+    
+    
+    
+    <br><br> <a href="../qr-generator/index.html">QR Generator</a><br><br>
+
+    <!--ad start 336 280-->
+
+    
+    
+    
+    
+    
+    
+    <!--ad end -->
+    <br>
+         
+    <div id="toolLinks">
+    <h2>Quick Navigation</h2>
+    <ul>
+        <li><a href="../index.html">Go to Home</a></li>
+    </ul>
+
+    <h3>Also Check:</h3>
+    <ul>
+        <li><a href="../binary-translator/index.html">Binary Translator</a></li>
+        
+        <li><a href="../color-picker/index.html">Color Picker</a></li>
+        <li><a href="../qr-generator/index.html">QR Code Generator</a></li>
+        <li><a href="../calculator/index.html">Calculator</a></li>
+        <li><a href="../image-crop/index.html">Image Cropper</a></li>
+        <li><a href="../morse-generator/index.html">Morse Code Converter</a></li>
+        <li><a href="../sga-generator/index.html">SGA (Minecraft) Generator</a></li>
+        <li><a href="../all-characters/index.html">All Characters & Symbols</a></li>
+         <li><a href="../what-is-my-ip/index.html">What's My IP</a></li>
+    </ul>
+
+    <h3>Visit Other Toolaroo Pages:</h3>
+    <ul>
+        <li><a href="../sites/FAQs.html">FAQs</a></li>
+        <li><a href="../sites/privacy.html">Privacy Policy</a></li>
+        <li><a href="../sites/terms.html">Terms of Use</a></li>
+        
+    </ul>
+</div>
+
+<style>
+#toolLinks a {
+    color: var(--link-color, #4d9fa3); /* light blue as default */
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+#toolLinks a:hover {
+    color: var(--link-hover-color, #82c7ff); /* lighter on hover */
+}
+
+/* Optional: set default fallback for older browsers */
+body.dark-theme #toolLinks a {
+    color: #82c7ff;
+}
+body.dark-theme #toolLinks a:hover {
+    color: #ffffff;
+}
+body.light-theme #toolLinks a {
+    color: #0044cc;
+}
+body.light-theme #toolLinks a:hover {
+    color: #0066ff;
+}
+</style>
+     
+ 
+ 
+  
+    
+    
+    
+    
+    
+    
+    
+    <div id="qrScannerSection">
+    <h1>QR Code Scanner — Scan QR Codes Using Camera or Image Upload</h1>
+    <p>Use Toolaroo’s free online QR Code Scanner to decode any QR code in seconds. With support for both live camera scanning and image upload from your device, it’s the perfect tool for instantly reading QR content — all from your browser, no apps needed.</p>
+
+    <h2>What You Can Do with Our QR Scanner:</h2>
+    <ul>
+        <li><strong>Scan via Camera:</strong> Open your camera, point at a QR code, and instantly see the decoded text</li>
+        <li><strong>Upload QR Image:</strong> Upload any saved QR code image from your gallery or file manager to scan</li>
+        <li><strong>Instant Decoding:</strong> Get the result immediately — no waiting, no clicks required</li>
+        <li><strong>Works on All Devices:</strong> Fully mobile-friendly and compatible with most modern browsers</li>
+        <li><strong>Secure & Private:</strong> Everything runs locally — no data is uploaded or stored</li>
+        <li><strong>Easy to Use:</strong> Clean UI with no ads, no distractions, and no sign-ups</li>
+    </ul>
+
+    <h2>Why Use Toolaroo’s QR Scanner?</h2>
+    <p>Unlike other tools that require installation or bombard you with ads, Toolaroo offers a fast, free, and private QR code scanner that just works. Whether you’re scanning product labels, WiFi QR codes, digital menus, or contact cards — our scanner helps you get the info instantly.</p>
+
+    <p>You can scan directly with your camera or choose a QR code image from your device. It’s lightweight, efficient, and accessible — all in your browser.</p>
+
+    <h2>Start Scanning Now!</h2>
+    <p>No setup, no wait — just allow camera access or upload an image and get your decoded text. Toolaroo’s QR Scanner is always ready when you need it.</p>
+
+    <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+        Powered by <strong>Toolaroo</strong> — your all-in-one platform for free, fast, and user-friendly online tools.
+    </p>
+</div>
+
+<style>
+#qrScannerSection {
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: transparent;
+    color: inherit;
+    text-align: left;
+}
+
+#qrScannerSection h1, #qrScannerSection h2 {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#qrScannerSection ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+#qrScannerSection li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+</style>
+    
+    
+    
+    <!--footer-->
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>

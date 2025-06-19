@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<!-- Primary Meta Tags -->
+<title>Font Maker - Create Fonts from Your Handwriting | Toolaroo</title>
+<meta name="title" content="Font Maker - Create Fonts from Your Handwriting | Toolaroo" />
+<meta name="description" content="Toolaroo's Font Maker lets you turn your handwriting into a real TTF font. Use the canvas to draw each character, with undo, redo, eraser, and adjustable pen size. No login, no app—just draw and download your custom font!" />
+<meta name="keywords" content="font maker, handwriting to font, create ttf font, handwriting font generator, draw font online, toolaroo font tool, custom font creator, canvas font maker, free font tool, toolaroo tools, handwriting based font, make your own font" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/font-maker/index.html" />
+<meta property="og:title" content="Font Maker - Create Fonts from Your Handwriting | Toolaroo" />
+<meta property="og:description" content="Draw your own font on a canvas and convert it to a TTF file instantly. Toolaroo’s Font Maker is free, easy, and lets you type using your own handwriting!" />
+<meta property="og:image" content="https://www.toolaroo.free.nf/assets/images/font-maker-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/font-maker/index.html" />
+<meta name="twitter:title" content="Font Maker - Create Fonts from Your Handwriting | Toolaroo" />
+<meta name="twitter:description" content="Turn your handwriting into a real font with Toolaroo’s Font Maker. Draw letters on canvas, customize, and download your personalized font easily!" />
+<meta name="twitter:image" content="https://www.toolaroo.free.nf/assets/images/font-maker-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+<link rel="canonical" href="https://toolaroo.free.nf/font-maker/index.html" />
+    
+    <title>Font maker - Handwriting | Toolaroo</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f1f5f5;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #151515;
+            color: white;
+        }
+        header {
+            width: 100%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 1000; /* Ensure header is always on top */
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+            z-index: 1001; /* Ensure drawer is above everything */
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+
+                
+   /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body.dark-mode #exportBtn {
+    background:#303030;
+    color:white;
+}
+
+
+  
+    #charSelectorWrapper {  
+      align-items: center;  
+      justify-content: center;  
+      margin-bottom: 0px; 
+      gap: 0px; 
+      padding-right:0px;
+          
+
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+    }  
+  
+    #charSelectorContainer {  
+      display: flex;  
+      overflow-x: auto; 
+      
+      scroll-behavior: smooth;  
+      border: 1px solid #ccc;  
+      padding-left: 10px; 
+      padding-right:10px;
+      border-radius: 5px;  
+     height:100%;
+      scrollbar-width: none;  
+      -ms-overflow-style: none;  
+    }  
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    #charSelectorContainer::-webkit-scrollbar {  
+      display: none;  
+    }  
+    
+  
+    .charOption {  
+      flex: 0 0 auto;  
+      padding: 10px 15px;  
+      margin: 0 3px;  
+      border-radius: 5px;  
+      border: 1px solid #aaa;  
+      background: #f0f0f0;  
+      font-size: 18px;  
+      cursor: pointer;  
+      user-select: none;  
+    }  
+    
+    .charOption.selected {  
+      background: #333;  
+      color: white;  
+      font-weight: bold;  
+      border-color: #000;  
+    }  
+  
+    #gridSection {  
+      display: flex;  
+      justify-content: center;  
+      width: 100%;  
+      overflow-x: auto;  
+    }  
+  
+    #grid {  
+      display: grid;  
+      grid-template-columns: repeat(20, var(--cell-size, 10px));  
+      grid-template-rows: repeat(40, var(--cell-size, 10px));  
+      width: calc(var(--cell-size, 10px) * 20);  
+      height: calc(var(--cell-size, 10px) * 40);  
+      justify-content: center;  
+      margin: 1px auto;  
+      touch-action: none;  
+      position: relative;  
+      overflow: hidden;  
+      
+    }  
+  
+    .cell {  
+      width: var(--cell-size, 10px);  
+      height: var(--cell-size, 10px);  
+      background: #fff;  
+      /**border: 0.001px solid #0000;  **/
+      box-sizing: border-box;  
+      cursor: pointer;  
+    }  
+  
+    .cell.active {  
+      background: #000;  
+    }  
+  
+    #baseline {  
+      position: absolute;  
+      width: 100%;  
+      height: 2px;  
+      background: red;  
+      top: calc(100% - var(--cell-size, 20px) * 6);  
+      left: 0;  
+      pointer-events: none;  
+    }  
+  
+    #controls {  
+      z-index:100;
+      width:100%;
+      height:50px;
+    } 
+
+    buttonnn, select, .buttonnn {  
+      margin:0px; 
+      padding:0;
+      height:10vw;
+      width:10vw;
+    }  
+
+    #toolIconBtn img {  
+      width: 24px;  
+      height: 24px;  
+      vertical-align: middle;  
+    }  
+    ul {
+      list-style-type: none;
+    }
+    #exportBtn {
+        width:100%;
+        height:100%;
+    }
+    h5 {
+        color:black;
+    }
+    body.dark-mode h5 {
+        color:white;
+    }
+    
+
+
+
+
+
+
+
+
+
+body.dark-mode buttonnn,
+body.dark-mode select,
+body.dark-mode .buttonnn {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #666;
+}
+
+
+body.dark-mode .charOption {
+    background: #333;
+    border-color: #777;
+    color: white;
+}
+
+body.dark-mode .charOption.selected {
+    background: #fff;
+    color: black;
+    border-color: #ccc;
+}
+
+body.dark-mode .cell {
+    background: #000;
+   /** border-color: #fff0;**/
+}
+
+body.dark-mode .cell.active {
+    background: white;
+}
+
+body.dark-mode #baseline {
+    background: #ff4444;
+}
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/font-maker.png" alt="font-maker">
+            Font Maker
+        </div>
+        <div class="right-header">
+                    
+   <!--share btn-->     
+        <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  font-size: 24px; 
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button id="bbbbb" class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+            <button id="bbbbb" class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button id="bbbbb" class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        
+        <a href="#" onclick="openContact()">Contact</a>
+    </div><br>
+    
+    
+    <!-- ad start 320 100-->
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+<!--ad end-->
+
+
+
+    <script>
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.innerText = "☀️";  
+            } else {
+                icon.innerText = "🌙";  
+            }
+        }
+
+
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+
+        function onScanSuccess(decodedText) {
+            document.getElementById("result").innerText = decodedText;
+        }
+
+        function onScanFailure(error) {
+            console.warn(error);
+        }
+
+        function copyText() {
+            let text = document.getElementById("result").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied to clipboard!");
+            });
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+<table style="width: 100%; table-layout: fixed;" border="1px">
+  <tr>
+    <td><button class="buttonnn" id="buttonnn" onclick="scrollCharSelector(-1)">◀</button id="buttonnn"></td>
+    <td style="width: 70vw; height:5vh">
+      <div id="charSelectorWrapper">
+        <div id="charSelectorContainer"></div>
+      </div>
+      
+    </td>
+    <td ><button class="buttonnn" id="buttonnn" onclick="scrollCharSelector(1)">▶</button></td>
+  </tr>
+  <tr>
+    <td>
+      <button class="buttonnn" onclick="toggleTool()" id="toolIconBtn"><img src="pencil.png" id="toolIcon"/></button>
+    </td>
+    <td rowspan="4">
+      <div id="grid"><div id="baseline"></div></div>
+    </td>
+    <td>
+        <h5>size:</h5>
+              <select id="brushSize">
+        <option value="1">1×1</option>
+        <option value="2">2×2</option>
+        <option value="3">3×3</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><button class="buttonnn" id="clearButton" onclick="clearGrid()">Clear</button></td>
+    <td>
+      <button class="buttonnn" id="buttonnn" onclick="undo()">Undo</button>
+    </td>
+  </tr>
+  <tr>
+      <td>
+      <button class="buttonnn" id="gridToggleBtn">Grid</button>
+      </td>
+      
+      <td>  
+            <button class="buttonnn" id="buttonnn" onclick="redo()">Redo</button>
+      </td>
+  </tr>
+  <tr>
+      <td>
+          
+      </td>
+      <td>
+                <br>   <br>   <br>   <br>   <br>   <br>   <br>   <br>
+      </td>
+  </tr>
+  <tr></tr>
+  <tr>
+    <td colspan="3">
+        
+        
+        ads will be here
+        
+        
+        
+        
+        
+        
+        
+        
+         
+    </td>
+   </tr>
+   <tr>
+    <td colspan="3">
+      <div id="controls">
+        <button class buttonnn id="exportBtn" onclick="exportFont()">Export TTF</button>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
+<script>
+  const btn = document.getElementById('gridToggleBtn');
+  let borderVisible = true;
+
+  btn.onclick = () => {
+    const isDark = document.body.classList.contains('dark-mode');
+    document.querySelectorAll('.cell').forEach(cell => {
+      if (borderVisible) {
+        // Hide border
+        cell.style.border = '0.001px solid #0000';
+      } else {
+        // Show based on theme
+        cell.style.border = isDark ? '0.001px solid #fff' : '0.001px solid #000';
+      }
+    });
+    borderVisible = !borderVisible;
+  };
+</script>
+
+
+
+<script src="opentype.min.js"></script>  
+<script>  
+  const gridCols = 20;  
+  const gridRows = 40;  
+  const grid = document.getElementById('grid');  
+  const brushSelect = document.getElementById('brushSize');  
+  const toolIcon = document.getElementById('toolIcon');  
+  const charSelectorContainer = document.getElementById('charSelectorContainer');  
+  
+  const cellData = {};  
+  let currentChar = '!';  
+  let isDrawing = false;  
+  let drawMode = true;  
+  const allCells = [];  
+
+  const undoStack = [];
+  const redoStack = [];
+
+  function saveState() {
+    undoStack.push(allCells.map(cell => cell.classList.contains('active')));
+    redoStack.length = 0;
+  }
+
+  function restoreState(state) {
+    allCells.forEach((cell, i) => {
+      cell.classList.toggle('active', state[i]);
+    });
+  }
+
+  function undo() {
+    if (undoStack.length) {
+      const current = allCells.map(cell => cell.classList.contains('active'));
+      redoStack.push(current);
+      const prev = undoStack.pop();
+      restoreState(prev);
+    }
+  }
+
+  function redo() {
+    if (redoStack.length) {
+      const current = allCells.map(cell => cell.classList.contains('active'));
+      undoStack.push(current);
+      const next = redoStack.pop();
+      restoreState(next);
+    }
+  }
+
+  function toggleTool() {  
+    drawMode = !drawMode;  
+    toolIcon.src = drawMode ? 'pencil.png' : 'erasor.png';  
+  }  
+
+  for (let i = 32; i <= 126; i++) {  
+    const char = String.fromCharCode(i);  
+    const span = document.createElement('span');  
+    span.className = 'charOption';  
+    span.textContent = char;  
+    span.dataset.char = char;  
+    if (char === currentChar) span.classList.add('selected');  
+    span.addEventListener('click', () => {  
+      saveCurrentChar();  
+      document.querySelectorAll('.charOption').forEach(el => el.classList.remove('selected'));  
+      span.classList.add('selected');  
+      currentChar = char;  
+      loadChar(currentChar);  
+    });  
+    charSelectorContainer.appendChild(span);  
+  }  
+
+  function scrollCharSelector(dir) {  
+    charSelectorContainer.scrollLeft += dir * 100;  
+  }  
+
+  for (let i = 0; i < gridCols * gridRows; i++) {  
+    const cell = document.createElement('div');  
+    cell.className = 'cell';  
+    cell.dataset.index = i;  
+    allCells.push(cell);  
+    grid.appendChild(cell);  
+  }  
+
+  function draw(cell) {
+    saveState();
+    const index = parseInt(cell.dataset.index);  
+    const x = index % gridCols;  
+    const y = Math.floor(index / gridCols);  
+    const brush = parseInt(brushSelect.value);  
+  
+    for (let dy = 0; dy < brush; dy++) {  
+      for (let dx = 0; dx < brush; dx++) {  
+        const cx = x + dx;  
+        const cy = y + dy;  
+        if (cx < gridCols && cy < gridRows) {  
+          const targetIndex = cy * gridCols + cx;  
+          const targetCell = allCells[targetIndex];  
+          if (drawMode) {  
+            targetCell.classList.add('active');  
+          } else {  
+            targetCell.classList.remove('active');  
+          }  
+        }  
+      }  
+    }  
+  }
+
+  allCells.forEach(cell => {  
+    cell.addEventListener('mousedown', () => {  
+      isDrawing = true;  
+      draw(cell);  
+    });  
+    cell.addEventListener('mouseover', () => {  
+      if (isDrawing) draw(cell);  
+    });  
+    cell.addEventListener('touchstart', e => {  
+      e.preventDefault();  
+      isDrawing = true;  
+      draw(cell);  
+    }, { passive: false });  
+    cell.addEventListener('touchmove', e => {  
+      e.preventDefault();  
+      const touch = e.touches[0];  
+      const gridRect = grid.getBoundingClientRect();  
+      if (  
+        touch.clientX >= gridRect.left &&  
+        touch.clientX <= gridRect.right &&  
+        touch.clientY >= gridRect.top &&  
+        touch.clientY <= gridRect.bottom  
+      ) {  
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);  
+        if (element && element.classList.contains('cell') && grid.contains(element)) {  
+          draw(element);  
+        }  
+      }  
+    }, { passive: false });  
+  });  
+
+  document.addEventListener('mouseup', () => isDrawing = false);  
+  document.addEventListener('touchend', () => isDrawing = false);  
+
+  function clearGrid() {
+    saveState();  
+    allCells.forEach(cell => cell.classList.remove('active'));  
+  }  
+
+  function saveCurrentChar() {  
+    const data = [];  
+    allCells.forEach((cell, i) => {  
+      data[i] = cell.classList.contains('active') ? 1 : 0;  
+    });  
+    cellData[currentChar] = data;  
+  }  
+
+  function loadChar(char) {  
+    clearGrid();  
+    const data = cellData[char];  
+    if (data) {  
+      allCells.forEach((cell, i) => {  
+        if (data[i]) cell.classList.add('active');  
+      });  
+    }  
+  }  
+
+  function getTightCropBounds(data) {  
+    let minX = gridCols, maxX = -1, minY = gridRows, maxY = -1;  
+    for (let y = 0; y < gridRows; y++) {  
+      for (let x = 0; x < gridCols; x++) {  
+        const i = y * gridCols + x;  
+        if (data[i]) {  
+          if (x < minX) minX = x;  
+          if (x > maxX) maxX = x;  
+          if (y < minY) minY = y;  
+          if (y > maxY) maxY = y;  
+        }  
+      }  
+    }  
+    if (maxX === -1) return null;  
+    return { minX, maxX, minY, maxY };  
+  }  
+
+  function exportFont() {  
+    saveCurrentChar();  
+    const glyphs = [];  
+    const unitsPerEm = 2048;  
+    const blockSize = unitsPerEm / gridRows;  
+  
+    const notdefPath = new opentype.Path();  
+    glyphs.push(new opentype.Glyph({  
+      name: '.notdef',  
+      unicode: 0,  
+      advanceWidth: unitsPerEm,  
+      path: notdefPath  
+    }));  
+  
+    for (const char in cellData) {  
+      const data = cellData[char] || [];  
+      const bounds = getTightCropBounds(data);  
+      const path = new opentype.Path();  
+  
+      if (bounds) {  
+        const { minX, maxX, minY, maxY } = bounds;  
+        const glyphWidth = (maxX - minX + 1) * blockSize;  
+  
+        for (let y = minY; y <= maxY; y++) {  
+          for (let x = minX; x <= maxX; x++) {  
+            const index = y * gridCols + x;  
+            if (data[index]) {  
+              const px = (x - minX) * blockSize;  
+              const py = (gridRows - 1 - y) * blockSize;  
+  
+              path.moveTo(px, py);  
+              path.lineTo(px + blockSize, py);  
+              path.lineTo(px + blockSize, py + blockSize);  
+              path.lineTo(px, py + blockSize);  
+              path.close();  
+            }  
+          }  
+        }  
+  
+        glyphs.push(new opentype.Glyph({  
+          name: char,  
+          unicode: char.charCodeAt(0),  
+          advanceWidth: glyphWidth,  
+          path: path  
+        }));  
+      } else {  
+        glyphs.push(new opentype.Glyph({  
+          name: char,  
+          unicode: char.charCodeAt(0),  
+          advanceWidth: unitsPerEm,  
+          path: new opentype.Path()  
+        }));  
+      }  
+    }  
+  
+    const font = new opentype.Font({  
+      familyName: 'MyGridFont',  
+      styleName: 'Regular',  
+      unitsPerEm: unitsPerEm,  
+      ascender: unitsPerEm * 0.85,  
+      descender: -unitsPerEm * 0.15,  
+      glyphs: glyphs  
+    });  
+  
+    const buffer = font.toArrayBuffer();  
+    const blob = new Blob([buffer], { type: 'font/ttf' });  
+    const link = document.createElement('a');  
+    link.href = URL.createObjectURL(blob);  
+    link.download = 'MyGridFont.ttf';  
+    link.click();  
+  }  
+
+  loadChar(currentChar);  
+</script>  
+
+<script>  
+  window.addEventListener('beforeunload', function (e) {  
+    e.preventDefault();  
+    e.returnValue = 'Are you sure you want to reload? All unsaved work will be lost.';  
+  });  
+</script>
+
+    
+
+
+
+
+
+
+
+
+
+<div class="container">
+  <section class="info-section">
+    <h1>What is Font Maker?</h1>
+    <p>
+      Font Maker is an innovative online tool that allows you to turn your own handwriting into a real TTF (TrueType Font) file. Whether you’re a designer, artist, or just someone who loves personalizing text, this tool helps you create a unique font based on how *you* write. No software, no installation, and absolutely free.
+    </p>
+
+    <h1>How to Use the Font Maker</h1>
+    <ul>
+      <li>Go to the <a href="https://www.toolaroo.free.nf/font-maker/index.html" target="_blank">Font Maker Tool</a> on Toolaroo.</li>
+      <li>Use the canvas to draw each alphabet and symbol with your handwriting.</li>
+      <li>Undo and redo strokes as needed.</li>
+      <li>Adjust pen size or use the eraser for corrections.</li>
+      <li>Once complete, click "Download Font" to get your personalized TTF file.</li>
+    </ul>
+
+    <h1>Toolaroo: What is It?</h1>
+    <p>
+      Toolaroo is a growing collection of free, mini online tools designed for daily use—without any need for logins or installations. Created by <strong>Maniruz Zaman</strong>, Toolaroo focuses on being fast, simple, and accessible. Whether you're scanning QR codes, generating passwords, converting fonts, or calculating math problems, Toolaroo's got your back.
+    </p>
+
+    <h1>Popular Tools on Toolaroo:</h1>
+    <ul>
+      <li>QR Code Generator</li>
+      <li>QR Code Scanner</li>
+      <li>Font Changer</li>
+      <li>SGA (Stylish Generator Alphabet)</li>
+      <li>Morse Code Generator</li>
+      <li>Simple Calculator</li>
+      <li>Font Maker (your current tool!)</li>
+    </ul>
+
+    <h1>FAQs</h1>
+    <ul>
+      <li><strong>Do I need to install anything?</strong> Nope! It's all online.</li>
+      <li><strong>Is it really free?</strong> 100% free. No hidden charges.</li>
+      <li><strong>Can I use the font commercially?</strong> Yes, it’s your handwriting—you own it.</li>
+      <li><strong>Does Toolaroo store my data?</strong> No data is stored. Everything is in-browser.</li>
+    </ul>
+  </section>
+
+  <style>
+
+    .container {
+      width: 100%;
+      padding: 30px;
+      background-color: transparent;
+      font-family: 'MyHandwriting', cursive;
+      color: #1f1f1f;
+      line-height: 1.7;
+    }
+
+    .info-section h1 {
+      font-size: 28px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #0f62fe;
+      border-left: 4px solid #0f62fe;
+      padding-left: 10px;
+    }
+
+    .info-section p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .info-section ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 25px;
+    }
+
+    .info-section ul li {
+      font-size: 15.5px;
+      margin-bottom: 10px;
+    }
+
+    .info-section a {
+      color: #0f62fe;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .info-section h1 {
+        font-size: 22px;
+      }
+
+      .info-section p,
+      .info-section ul li {
+        font-size: 14px;
+      }
+    }
+    
+    
+    
+    
+    body.dark-mode .container {
+  color: #e0e0e0;
+}
+
+body.dark-mode .info-section h1 {
+  color: #4fa3ff;
+  border-left: 4px solid #4fa3ff;
+}
+
+body.dark-mode .info-section p,
+body.dark-mode .info-section ul li {
+  color: #ccc;
+}
+
+body.dark-mode .info-section a {
+  color: #81bfff;
+}
+  </style>
+</div>    
+    
+    <!--footer-->
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>

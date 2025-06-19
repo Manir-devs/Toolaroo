@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+             <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <!-- Primary Meta Tags -->
+<title>Color Picker Tool - HEX, RGB & HSV Color Codes | Toolaroo</title>
+<meta name="title" content="Color Picker Tool - HEX, RGB & HSV Color Codes | Toolaroo" />
+<meta name="description" content="Toolaroo's free Color Picker lets you choose any color using an interactive color wheel and gives you accurate HEX, RGB, and HSV values instantly. Copy color codes with one click — fast, simple, and perfect for designers, developers, and creatives!" />
+<meta name="keywords" content="color picker, toolaroo color tool, hex color, rgb picker, hsv picker, color wheel, color code finder, color selector, online color tool, color generator, web design colors, UI color picker, color values, hex to rgb, rgb to hsv, toolaroo tools, manir, manirbhaii, color picker by manir, pick color, html color, css color tool, digital color picker, color codes, color matching, web dev tool, creative tools" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/color-picker/index.html" />
+<meta property="og:title" content="Color Picker Tool - HEX, RGB & HSV Color Codes | Toolaroo" />
+<meta property="og:description" content="Pick any color from the wheel and get HEX, RGB, or HSV codes instantly using Toolaroo’s free color picker. Clean UI, quick copy buttons, and no login required!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/color-picker-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/color-picker/index.html" />
+<meta name="twitter:title" content="Color Picker Tool - HEX, RGB & HSV Color Codes | Toolaroo" />
+<meta name="twitter:description" content="Toolaroo brings you a free, interactive color picker to easily get HEX, RGB, and HSV codes. Ideal for devs, designers, and everyday use!" />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/color-picker-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+<link rel="canonical" href="https://toolaroo.free.nf/color-picker/index.html" />
+    
+    
+    
+    
+    <title>Toolaroo Color Picker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f4f4f4;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        header {
+            width: 100%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 30px; /* Adjust the size of the logo */
+            height: 30px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            cursor: crosshair;
+            margin-top: 20px;
+            width: 300px; /* Smaller canvas size */
+            height: 300px;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode .output {
+            background-color: #222;
+            color: white;
+        }
+        .color-box {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            
+            border: 1px solid #ccc;
+        }
+        .color-info {
+            display: inline-block;
+            text-align: left;
+            margin-left: 10px;
+        }
+        #brightnessSlider {
+            margin-top: 20px;
+            width: 300px;
+            
+        }
+                
+        
+   /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/color pick.png" alt="color picker">
+            Color Picker
+        </div>
+        <div class="right-header">
+               <!--share btn-->     
+        <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  font-size: 24px; /* optional: adjust size */
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+            <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        
+        <a href="#" onclick="openContact()">Contact</a>
+    </div>
+<br>
+
+
+<!--ad start 320 100-->
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--ad end-->
+    
+    
+    <canvas id="colorWheel" width="300" height="300"></canvas>
+    <div>
+        <input type="range" id="brightnessSlider" min="0" max="100" value="100">
+    </div>
+    <div class="output">
+        <div class="color-box" id="colorBox"></div>
+        <div class="color-info">
+            <p><strong>HEX:</strong> <span id="hexCode">#000000</span></p>
+            <p><strong>RGB:</strong> <span id="rgbCode">rgb(0, 0, 0)</span></p>
+            <p><strong>HSV:</strong> <span id="hsvCode">hsv(0, 0%, 0%)</span></p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('colorWheel');
+        const ctx = canvas.getContext('2d');
+        const colorBox = document.getElementById('colorBox');
+        const hexCode = document.getElementById('hexCode');
+        const rgbCode = document.getElementById('rgbCode');
+        const hsvCode = document.getElementById('hsvCode');
+        const brightnessSlider = document.getElementById('brightnessSlider');
+
+        let brightness = 1;
+        let lastClickPosition = null;
+
+        const drawColorWheel = () => {
+            const radius = canvas.width / 2;
+            const imageData = ctx.createImageData(canvas.width, canvas.height);
+            const data = imageData.data;
+
+            for (let y = 0; y < canvas.height; y++) {
+                for (let x = 0; x < canvas.width; x++) {
+                    const dx = x - radius;
+                    const dy = y - radius;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance <= radius) {
+                        const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 180;
+                        const saturation = distance / radius;
+                        const [r, g, b] = hsvToRgb(angle, saturation, brightness);
+
+                        const index = (y * canvas.width + x) * 4;
+                        data[index] = r;
+                        data[index + 1] = g;
+                        data[index + 2] = b;
+                        data[index + 3] = 255;
+                    }
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+
+            if (lastClickPosition) {
+                const { x, y } = lastClickPosition;
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        };
+
+        const hsvToRgb = (h, s, v) => {
+            let c = v * s;
+            let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+            let m = v - c;
+
+            let r = 0, g = 0, b = 0;
+
+            if (0 <= h && h < 60) [r, g, b] = [c, x, 0];
+            else if (60 <= h && h < 120) [r, g, b] = [x, c, 0];
+            else if (120 <= h && h < 180) [r, g, b] = [0, c, x];
+            else if (180 <= h && h < 240) [r, g, b] = [0, x, c];
+            else if (240 <= h && h < 300) [r, g, b] = [x, 0, c];
+            else if (300 <= h && h <= 360) [r, g, b] = [c, 0, x];
+
+            return [
+                Math.round((r + m) * 255),
+                Math.round((g + m) * 255),
+                Math.round((b + m) * 255)
+            ];
+        };
+
+        const rgbToHex = (r, g, b) => {
+            return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
+        };
+
+        const rgbToHsv = (r, g, b) => {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const delta = max - min;
+
+            let h = 0, s = 0, v = max;
+
+            if (delta !== 0) {
+                s = delta / max;
+                if (max === r) h = ((g - b) / delta) % 6;
+                else if (max === g) h = (b - r) / delta + 2;
+                else h = (r - g) / delta + 4;
+
+                h *= 60;
+                if (h < 0) h += 360;
+            }
+
+            return [Math.round(h), Math.round(s * 100), Math.round(v * 100)];
+        };
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            lastClickPosition = { x, y };
+
+            const pixel = ctx.getImageData(x, y, 1, 1).data;
+            const [r, g, b] = pixel;
+
+            const hex = rgbToHex(r, g, b);
+            const [h, s, v] = rgbToHsv(r, g, b);
+
+            colorBox.style.backgroundColor = hex;
+            hexCode.innerText = hex;
+            rgbCode.innerText = `rgb(${r}, ${g}, ${b})`;
+            hsvCode.innerText = `hsv(${h}, ${s}%, ${v}%)`;
+
+            drawColorWheel();
+        });
+
+        brightnessSlider.addEventListener('input', () => {
+            brightness = brightnessSlider.value / 100;
+            drawColorWheel();
+        });
+
+        drawColorWheel();
+
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.innerText = "☀️";  // Change to sun icon
+            } else {
+                icon.innerText = "🌙";  // Change to moon icon
+            }
+        }
+
+        
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+    </script>
+    <br><br>
+    
+ <!--ad start 320 100-->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+<!--ad end-->
+
+<br>
+
+ 
+      
+    <div id="toolLinks">
+    <h2>Quick Navigation</h2>
+    <ul>
+        <li><a href="../index.html">Go to Home</a></li>
+    </ul>
+
+    <h3>Also Check:</h3>
+    <ul>
+        <li><a href="../binary-translator/index.html">Binary Translator</a></li>
+        
+        <li><a href="../calculator/index.html">Calculator</a></li>
+        <li><a href="../qr-generator/index.html">QR Code Generator</a></li>
+        <li><a href="../qr-scanner/index.html">QR Code Scanner</a></li>
+        <li><a href="../image-crop/index.html">Image Cropper</a></li>
+        <li><a href="../morse-generator/index.html">Morse Code Converter</a></li>
+        <li><a href="../sga-generator/index.html">SGA (Minecraft) Generator</a></li>
+        <li><a href="../all-characters/index.html">All Characters & Symbols</a></li>
+         <li><a href="../what-is-my-ip/index.html">What's My IP</a></li>
+    </ul>
+
+    <h3>Visit Other Toolaroo Pages:</h3>
+    <ul>
+        <li><a href="../sites/FAQs.html">FAQs</a></li>
+        <li><a href="../sites/privacy.html">Privacy Policy</a></li>
+        <li><a href="../sites/terms.html">Terms of Use</a></li>
+        
+    </ul>
+</div>
+
+<style>
+#toolLinks a {
+    color: var(--link-color, #4d9fa3); /* light blue as default */
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+#toolLinks a:hover {
+    color: var(--link-hover-color, #82c7ff); /* lighter on hover */
+}
+
+/* Optional: set default fallback for older browsers */
+body.dark-theme #toolLinks a {
+    color: #82c7ff;
+}
+body.dark-theme #toolLinks a:hover {
+    color: #ffffff;
+}
+body.light-theme #toolLinks a {
+    color: #0044cc;
+}
+body.light-theme #toolLinks a:hover {
+    color: #0066ff;
+}
+</style>
+     
+ 
+ 
+ 
+    
+    
+    
+   <div id="colorPickerSection">
+    <h1>Online Color Picker — Find HEX, RGB, and HSV Values Instantly</h1>
+    <p>Welcome to Toolaroo’s advanced online color picker — a clean and easy-to-use tool for designers, developers, and creative minds who need precise color codes fast. Pick any color from the palette or screen and instantly get its HEX, RGB, and HSV values. Perfect for web design, graphic work, and UI development.</p>
+
+    <h2>What You Can Do With This Color Picker:</h2>
+    <ul>
+        <li><strong>Pick Colors:</strong> Choose any shade using a modern, responsive color palette</li>
+        <li><strong>Get HEX Code:</strong> Instantly copy the HEX code of your selected color</li>
+        <li><strong>Get RGB & HSV Values:</strong> Easily view and copy the RGB and HSV formats</li>
+        <li><strong>Live Preview:</strong> See how your selected color looks in real time</li>
+        <li><strong>Responsive Design:</strong> Works smoothly on both desktop and mobile devices</li>
+        <li><strong>One-Click Copy:</strong> Copy any color value with a single tap</li>
+        <li><strong>Free and Fast:</strong> No login, no ads, no distractions — just the color tool you need</li>
+    </ul>
+
+    <h2>Why Use Toolaroo’s Color Picker?</h2>
+    <p>Toolaroo’s color picker is crafted for speed and simplicity. Whether you’re a developer coding a webpage, a designer creating UI components, or a hobbyist trying out digital art — this tool is the perfect companion. Unlike other bloated tools, Toolaroo delivers quick results with no loading issues or interruptions.</p>
+
+    <p>You can pick any color manually or use the color input control to paste or tweak HEX values. It supports smooth, real-time changes and gives instant visual feedback so you can work faster and smarter.</p>
+
+    <h2>Start Picking Colors Now!</h2>
+    <p>Choose a color from the picker above and explore its different formats. Use HEX codes in your CSS, RGB in design tools, or HSV for deeper adjustments. With Toolaroo’s color picker, color precision is just a click away.</p>
+
+    <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+        Designed and powered by <strong>Toolaroo</strong> — your ultimate free online tools hub.
+    </p>
+</div>
+
+<style>
+#colorPickerSection {
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: transparent;
+    color: inherit;
+    text-align: left;
+}
+
+#colorPickerSection h1, #colorPickerSection h2 {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#colorPickerSection ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+#colorPickerSection li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+</style> 
+    
+    
+    <!--footer-->
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>

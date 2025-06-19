@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    
+    <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/custom-splashes.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/custom-splashes.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/custom-splashes.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary Meta Tags -->
+<title>Custom Splashes for Minecraft Bedrock | Toolaroo</title>
+<meta name="title" content="Custom Splash Text Generator for Minecraft | Toolaroo" />
+<meta name="description" content="Create your own Minecraft Bedrock splash text and download it as a .mcpack file instantly. No ads, no login — just type, generate, and enjoy with Toolaroo!" />
+<meta name="keywords" content="minecraft splash text, splash generator, minecraft bedrock splash text, .mcpack generator, custom splash tool, toolaroo splash maker, minecraft tools, bedrock addons, custom text splash, tool by manir, manirbhaii tools, minecraft fun tools, splash text pack, download mcpack, toolaroo splash generator" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/custom-splashes/index.html" />
+<meta property="og:title" content="Custom Splash Text Generator for Minecraft | Toolaroo" />
+<meta property="og:description" content="Generate funny or personalized Minecraft Bedrock splash texts with Toolaroo. Download your custom .mcpack file in seconds. Clean and easy UI!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/custom-splashes-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/custom-splashes/index.html" />
+<meta name="twitter:title" content="Custom Splash Text Generator for Minecraft | Toolaroo" />
+<meta name="twitter:description" content="Create and download your own Minecraft Bedrock splash text using Toolaroo’s free splash generator. Simple, fast, and ad-free!" />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/custom-splashes-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+<link rel="canonical" href="https://toolaroo.free.nf/custom-splashes/index.html" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <title>Toolaroo - Custom Splashes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f4f4f4;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        header {
+            width: 100%;
+            height:10%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 50px; 
+            height: 50px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+
+        /* Custom Splashes CSS */
+        #toolarooDropZone {
+            border: 2px dashed #0f0;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease;
+            border-radius: 8px;
+        }
+        #toolarooDropZone.hover {
+            background: #2e2e2e;
+            border-color: #3f3;
+        }
+        #toolarooSplashInputs textarea {
+            width: 90%;
+            max-width: 500px;
+            height: 30px;
+            font-family: monospace;
+            font-size: 14px;
+            padding: 5px 10px;
+            
+            margin:5%;
+            background-color: #fff;
+            color: #00f;
+            border: 1px solid #0f0;
+            border-radius: 5px;
+            resize: none;
+            margin-top:0px;
+            margin-bottom:3px;
+        }
+        body.dark-mode #toolarooSplashInputs textarea {
+            background-color: #000;
+            color: #0f0;
+            border-color: #0f0;
+        }
+        #toolarooAddMoreBtn, #toolarooGenerateBtn {
+            background-color: #0f0;
+            color: #111;
+            border: none;
+            
+            padding: 10px 50px;
+            margin: 15px 5px;
+            font-weight: bold;
+            font-family: monospace;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.2s ease;
+            
+        }
+        #toolarooAddMoreBtn:hover, #toolarooGenerateBtn:hover {
+            background-color: #3f3;
+        }
+        #toolarooStatus {
+            
+            margin-top: 0px;
+            margin-bottom:10px;
+            color: #00f;
+            font-size: 16px;
+            background-color:yellow;
+            border-radius:4px;
+            
+        }
+        
+        
+        
+        
+        
+        
+           /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/custom-splashes.png" alt="Custom Splashes">
+            Custom Splashes
+        </div>
+        <div class="right-header">
+                    <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  
+  font-size: 24px; 
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+            <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        
+        <a href="../index.html">Home</a>
+        <a href="#" onclick="openContact()">Contact</a>
+    </div>
+    
+    <br>
+    
+    <!--ad start-->
+    
+    
+    
+    
+    
+    
+<iframe data-aa='2386314' src='//ad.a-ads.com/2386314?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+
+    
+    
+    
+    
+    <!--ad end-->
+    
+    
+    
+
+    <!-- Custom Splashes Content -->
+    <div id="toolarooDropZone" onclick="document.getElementById('toolarooIconInput').click()">
+        Drag & Drop or Click to Upload Pack Icon (.png)
+        <input type="file" id="toolarooIconInput" accept="image/png" style="display:none">
+    </div>
+
+    <div id="toolarooSplashInputs">
+        <textarea rows="10" cols="50" placeholder="Enter one splash per line..."></textarea>
+    </div>
+    <div style="display:flex; gap:10px; justify-content:center;">
+    <button id="toolarooAddMoreBtn" onclick="addMore()">Add More</button>
+    <button id="toolarooGenerateBtn" onclick="generatePack()">Create</button>
+    </div>
+    <p id="toolarooStatus"></p>
+    <a href="../sga-generator/index.html">SGA generator</a>
+
+    <script>
+        // Drawer and Dark Mode Functions
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.innerText = "☀️";  
+            } else {
+                icon.innerText = "🌙";  
+            }
+        }
+
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+
+        // Custom Splashes Script
+        let customIcon = null;
+
+        const dropZone = document.getElementById('toolarooDropZone');
+        const iconInput = document.getElementById('toolarooIconInput');
+
+        iconInput.addEventListener('change', e => {
+            if (e.target.files[0]) {
+                customIcon = e.target.files[0];
+                dropZone.textContent = "✓selected: " + customIcon.name;
+            }
+        });
+
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropZone.classList.add("hover");
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove("hover");
+        });
+
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.classList.remove("hover");
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === "image/png") {
+                customIcon = file;
+                dropZone.textContent = "Custom Icon Dropped: " + customIcon.name;
+            } else {
+                alert("Only PNG files allowed.");
+            }
+        });
+
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                const r = Math.random() * 16 | 0;
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+        }
+
+        function addMore() {
+            const div = document.getElementById("toolarooSplashInputs");
+            const textarea = document.createElement("textarea");
+            textarea.rows = 10;
+            textarea.cols = 50;
+            textarea.placeholder = "Enter more splashes...";
+            div.appendChild(document.createElement("br"));
+            div.appendChild(textarea);
+        }
+
+        async function generatePack() {
+            const textareas = document.querySelectorAll("#toolarooSplashInputs textarea");
+            const splashes = [];
+
+            textareas.forEach(textarea => {
+                const lines = textarea.value
+                    .split('\n')
+                    .map(s => s.trim())
+                    .filter(Boolean);
+                splashes.push(...lines);
+            });
+
+            if (splashes.length === 0) {
+                alert("Enter at least one splash!");
+                return;
+            }
+
+            const zip = new JSZip();
+
+            const manifest = {
+                format_version: 2,
+                header: {
+                    name: "Toolaroo's Custom Splash",
+                    description: "Generated with Toolaroo. website: https://toolaroo.free.nf",
+                    uuid: generateUUID(),
+                    version: [1, 0, 0],
+                    min_engine_version: [1, 14, 0]
+                },
+                modules: [{
+                    type: "resources",
+                    uuid: generateUUID(),
+                    version: [1, 0, 0]
+                }]
+            };
+
+            const splashJson = { splashes };
+
+            const cs = zip.folder("cs");
+            cs.file("manifest.json", JSON.stringify(manifest, null, 2));
+            cs.file("splashes.json", JSON.stringify(splashJson, null, 2));
+
+            let iconBlob;
+
+            if (customIcon) {
+                iconBlob = customIcon;
+            } else {
+                iconBlob = await fetch("toolarooIcon.png").then(res => res.blob());
+            }
+
+            cs.file("pack_icon.png", iconBlob);
+
+            zip.generateAsync({ type: "blob" }).then(blob => {
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "custom_splashes.mcaddon";
+                link.click();
+                document.getElementById('toolarooStatus').textContent = "Pack Downloaded!";
+            });
+        }
+    </script>
+    
+    
+    <br>
+    
+    <!--ad start 336 280-->
+    
+    
+    
+<iframe data-aa='2386314' src='//ad.a-ads.com/2386314?size=320x100' style='width:320px; height:100px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+
+    
+    
+    
+ <!--ad end-->   
+    
+    <br>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div id="toolarooGuideContainer">
+    <style>
+        #toolarooGuideContainer {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff00;
+            color: #000000;
+            border-radius: 10px;
+            
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode #toolarooGuideContainer {
+            background-color: #1e1e1e00;
+            color: #ffffff;
+        }
+
+        #toolarooGuideContainer h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #0f0;
+            padding-bottom: 5px;
+        }
+
+        #toolarooGuideContainer ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        #toolarooGuideContainer li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        body.dark-mode #toolarooGuideContainer h1 {
+            border-color: #0f0;
+        }
+    </style>
+
+    <h1>Custom Splashes Minecraft</h1>
+    <ul>
+        <li>Click on the box to upload a PNG icon (optional).</li>
+        <li>Enter your custom splash texts in the textarea. One splash per line.</li>
+        <li>Click "Add More" if you want to add more splash input boxes.</li>
+        <li>When done, click "Create" to generate your custom splash pack.</li>
+        <li>The pack will download as a `.mcaddon.zip` file.</li>
+        <li>Go to file manager, then select the zip file, rename as ’.mcaddon‘</li>
+        <li>File is ready.. :)</li>
+    </ul>
+
+    <h1>Important Notes</h1>
+    <ul>
+        <li>Only PNG images are supported for the icon.</li>
+        <li>If no icon is provided, a default one will be used.</li>
+        <li>Make sure your splashes follow Minecraft's vibe (short, fun lines).</li>
+    </ul>
+    <h1>Why Custom Splashes?</h1>
+    <ul>
+        <li>Add a personal touch to Minecraft’s main menu.</li>
+        <li>Show fun quotes, memes, or inside jokes when you open the game.</li>
+        <li>Perfect for themed packs or server branding.</li>
+    </ul>
+
+    <h1>How to Activate in Minecraft</h1>
+    <ul>
+        <li>Open Minecraft Bedrock Edition.</li>
+        <li>Click on “Settings” > “Storage” to make sure old versions are removed.</li>
+        <li>Go to file manager, and select the `.mcaddon` file to import it into Minecraft.</li>
+        <li>Activate the resource pack in your global settings or specific world.</li>
+    </ul>
+    <h1>About Toolaroo</h1>
+    <ul>
+        <li>Toolaroo is a growing hub of simple yet useful tools for daily use.</li>
+        <li>From Binary Translators to Morse Code Generators, it has many utilities.</li>
+        <li>Also includes QR Code Generators, Calculators, and more—easy and free!</li>
+    </ul>
+
+    <h1>Need Help?</h1>
+    <ul>
+        <li>Click on "Contact" in the menu to reach out via Instagram.</li>
+        <li>For advanced editing, modify the `splashes.json` manually inside the pack.</li>
+    </ul>
+</div>
+    
+        
+    <!--footer-->
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+
+    
+</body>
+</html>

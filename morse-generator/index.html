@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+             <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+<title>Morse Code Generator & Translator - Text to Morse & Morse to Text | Toolaroo</title>
+<meta name="title" content="Morse Code Generator & Translator - Text to Morse & Morse to Text | Toolaroo" />
+<meta name="description" content="Convert text to Morse code or Morse code to text using Toolaroo's free Morse Code Generator. Clean interface, fast conversion, and instant copy support. No login, no ads — just simple Morse code magic!" />
+<meta name="keywords" content="morse code generator, morse translator, text to morse, morse to text, free morse converter, morse code, morse code tool, toolaroo morse, copy morse code, morse translator online, online morse code tool, morse decoder, morse encoder, toolaroo tools, manir tools, manirbhaii, text converter, simple morse converter, morse for beginners, ham radio morse, digital morse tool, fast morse code, toolaroo, manir, manir's website, manir website" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/morse-generator/index.html" />
+<meta property="og:title" content="Morse Code Generator & Translator - Text to Morse & Morse to Text | Toolaroo" />
+<meta property="og:description" content="Use Toolaroo's Morse Code Generator to convert between text and Morse code instantly. Free, fast, and includes one-click copy. Ideal for learning or fun!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/morse-generator-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/morse-generator/index.html" />
+<meta name="twitter:title" content="Morse Code Generator & Translator - Text to Morse & Morse to Text | Toolaroo" />
+<meta name="twitter:description" content="Easily convert text to Morse or Morse to text with Toolaroo's clean and fast converter. One-click copy, no login, and totally free!" />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/morse-generator-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+
+<link rel="canonical" href="https://toolaroo.free.nf/morse-generator/index.html" />
+    
+    
+    <title>Toolaroo Morse Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f4f4f4;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        header {
+            width: 100%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 30px; /* Adjust the size of the logo */
+            height: 30px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+        /* Morse Code Converter Styles */
+        .morse-converter {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .morse-converter input, .morse-converter textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: white;
+            color: black;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .morse-converter input, body.dark-mode .morse-converter textarea {
+            background-color: #333;
+            color: white;
+            border-color: #555;
+        }
+        .morse-converter button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .morse-converter button:hover {
+            background-color: #45a049;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+                
+        
+   /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/morse.png" alt="morse">
+            Morse Generator
+        </div>
+        <div class="right-header">
+               <!--share btn-->     
+        <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  font-size: 24px; /* optional: adjust size */
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+            <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        
+        <a href="#" onclick="openContact()">Contact</a>
+    </div><br>
+    
+    
+    
+    
+    
+   <!--ad start 320 100--> 
+    
+    
+    
+    
+    
+    
+
+
+
+<!-- ad end-->
+
+
+    <!-- Morse Code Converter -->
+    <div class="morse-converter">
+        <label for="textInput">Enter Text:</label>
+        <textarea id="textInput" rows="4" placeholder="Enter text to convert to Morse code"></textarea>
+        <div class="button-container">
+            <button onclick="textToMorse()">Convert</button>
+            <button onclick="copyTextToClipboard()">Copy Text</button>
+        </div>
+        <label for="morseInput">Enter Morse Code:</label>
+        <textarea id="morseInput" rows="4" placeholder="Enter Morse code to convert to text"></textarea>
+        <div class="button-container">
+            <button onclick="morseToText()">Convert</button>
+            <button onclick="copyMorseToClipboard()">Copy Morse</button>
+        </div>
+    </div>
+
+    <script>
+        // Morse Code Map
+        const morseCodeMap = {
+            'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+            'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+            'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
+            '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+            '0': '-----', '.': '.-.-.-', ',': '--..--', '?': '..--..', '\'': '.----.', '!': '-.-.--', '/': '-..-.', '(': '-.--.', ')': '-.--.-',
+            '&': '.-...', ':': '---...', ';': '-.-.-.', '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-', '"': '.-..-.', '$': '...-..-',
+            '@': '.--.-.', ' ': '/'
+        };
+
+        // Function to convert text to Morse Code
+        function textToMorse() {
+            const text = document.getElementById('textInput').value.toUpperCase();
+            let morseCode = '';
+            for (let i = 0; i < text.length; i++) {
+                if (morseCodeMap[text[i]]) {
+                    morseCode += morseCodeMap[text[i]] + ' ';
+                }
+            }
+            document.getElementById('morseInput').value = morseCode.trim();
+        }
+
+        // Function to convert Morse Code to text
+        function morseToText() {
+            const morse = document.getElementById('morseInput').value;
+            const morseArray = morse.trim().split(' ');
+            let text = '';
+            for (let i = 0; i < morseArray.length; i++) {
+                const letter = Object.keys(morseCodeMap).find(key => morseCodeMap[key] === morseArray[i]);
+                if (letter) {
+                    text += letter;
+                }
+            }
+            document.getElementById('textInput').value = text;
+        }
+
+        // Function to copy text to clipboard
+        function copyTextToClipboard() {
+            const text = document.getElementById('textInput').value;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Text copied to clipboard!');
+            }, function() {
+                alert('Failed to copy text.');
+            });
+        }
+
+        // Function to copy Morse code to clipboard
+        function copyMorseToClipboard() {
+            const morseCode = document.getElementById('morseInput').value;
+            navigator.clipboard.writeText(morseCode).then(function() {
+                alert('Morse code copied to clipboard!');
+            }, function() {
+                alert('Failed to copy Morse code.');
+            });
+        }
+
+        // Template Functions
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.innerText = "☀️";  // Change to sun icon
+            } else {
+                icon.innerText = "🌙";  // Change to moon icon
+            }
+        }
+
+        
+
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+    </script>
+        
+        
+       <!--ad start 336 280--> 
+    
+
+    
+    
+    
+    
+    
+    <!--ad end-->
+    
+    <br>
+    
+    
+    <div id="toolLinks">
+    <h2>Quick Navigation</h2>
+    <ul>
+        <li><a href="../index.html">Go to Home</a></li>
+    </ul>
+
+    <h3>Also Check:</h3>
+    <ul>
+        <li><a href="../binary-translator/index.html">Binary Translator</a></li>
+        
+        <li><a href="../color-picker/index.html">Color Picker</a></li>
+        <li><a href="../qr-generator/index.html">QR Code Generator</a></li>
+        <li><a href="../qr-scanner/index.html">QR Code Scanner</a></li>
+        <li><a href="../image-crop/index.html">Image Cropper</a></li>
+        <li><a href="../calculator/index.html">Calculator</a></li>
+        <li><a href="../sga-generator/index.html">SGA (Minecraft) Generator</a></li>
+        <li><a href="../all-characters/index.html">All Characters & Symbols</a></li>
+         <li><a href="../what-is-my-ip/index.html">What's My IP</a></li>
+    </ul>
+
+    <h3>Visit Other Toolaroo Pages:</h3>
+    <ul>
+        <li><a href="../sites/FAQs.html">FAQs</a></li>
+        <li><a href="../sites/privacy.html">Privacy Policy</a></li>
+        <li><a href="../sites/terms.html">Terms of Use</a></li>
+        
+    </ul>
+</div>
+
+<style>
+#toolLinks a {
+    color: var(--link-color, #4d9fa3); /* light blue as default */
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+#toolLinks a:hover {
+    color: var(--link-hover-color, #82c7ff); /* lighter on hover */
+}
+
+/* Optional: set default fallback for older browsers */
+body.dark-theme #toolLinks a {
+    color: #82c7ff;
+}
+body.dark-theme #toolLinks a:hover {
+    color: #ffffff;
+}
+body.light-theme #toolLinks a {
+    color: #0044cc;
+}
+body.light-theme #toolLinks a:hover {
+    color: #0066ff;
+}
+</style>
+     
+ 
+ 
+ 
+    
+    
+    
+    
+    
+    
+    
+        
+        
+   <div id="morseGeneratorSection">
+    <h1>Morse Code Translator — Convert Text to Morse and Morse to Text</h1>
+    <p>Toolaroo’s free online Morse Code Translator helps you quickly convert English text into Morse code and decode Morse back into readable text. Whether you're a student learning Morse, a hobbyist sending secret messages, or just curious — this tool is for you.</p>
+
+    <h2>Key Features of Our Morse Code Tool:</h2>
+    <ul>
+        <li><strong>Text to Morse Code:</strong> Instantly convert plain English into internationally recognized Morse code</li>
+        <li><strong>Morse Code to Text:</strong> Decode Morse code into readable English — fast and accurately</li>
+        <li><strong>Real-Time Conversion:</strong> Type and see the result instantly, no delay or lag</li>
+        <li><strong>Supports Common Characters:</strong> Letters, numbers, punctuation, and basic symbols included</li>
+        <li><strong>Copy with One Click:</strong> Easily copy the translated Morse or text for pasting elsewhere</li>
+        <li><strong>No Ads or Distractions:</strong> A clean, focused experience with zero interruptions</li>
+    </ul>
+
+    <h2>Why Use Toolaroo’s Morse Code Generator?</h2>
+    <p>Toolaroo’s Morse converter is built to be easy, fast, and accurate. Whether you’re studying Morse code for exams, experimenting with secret messaging, or building your own puzzle games, this tool gives you a simple interface to get your results without any clutter.</p>
+
+    <p>You don’t need to install anything or register. It’s fully browser-based and works on desktop, tablet, or mobile. Simply enter your message, convert, and copy — that’s it!</p>
+
+    <h2>Start Translating in Seconds</h2>
+    <p>Explore Morse code the easy way. Toolaroo makes it effortless to switch between Morse and text, helping you learn or play with one of the oldest communication systems in the world.</p>
+
+    <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+        Designed and powered by <strong>Toolaroo</strong> — your ultimate free online tools hub.
+    </p>
+</div>
+
+<style>
+#morseGeneratorSection {
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: transparent;
+    color: inherit;
+    text-align: left;
+}
+
+#morseGeneratorSection h1, #morseGeneratorSection h2 {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#morseGeneratorSection ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+#morseGeneratorSection li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+</style>     
+        
+        
+        
+        
+    <!--footer-->
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>

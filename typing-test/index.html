@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary Meta Tags -->
+<title>Typing Trainer - Practice Typing with Fun Aesop Stories | Toolaroo</title>
+<meta name="title" content="Typing Trainer - Practice Typing with Fun Aesop Stories | Toolaroo" />
+<meta name="description" content="Toolaroo's Typing Trainer helps you improve your typing speed and accuracy using fun, easy Aesop-style stories. Real-time WPM, accuracy stats, and auto-scroll!" />
+<meta name="keywords" content="typing trainer, typing test, typing practice, aesop stories, fun typing, learn typing, typing tool, toolaroo typing, improve typing, type faster, manir, manirbhaii, manir website, manir's website, toolaroo tools, wpm tester, typing game, typing speed test, accuracy checker, typing for kids, typing story mode" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/typing-test/index.html" />
+<meta property="og:title" content="Typing Trainer - Practice Typing with Fun Aesop Stories | Toolaroo" />
+<meta property="og:description" content="Boost your typing skills with Toolaroo’s fun typing trainer. Type short Aesop-style stories and get real-time speed, accuracy & feedback!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/typing-test-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/typing-test/index.html" />
+<meta name="twitter:title" content="Typing Trainer - Practice Typing with Fun Aesop Stories | Toolaroo" />
+<meta name="twitter:description" content="Toolaroo’s Typing Trainer lets you type short stories and get instant WPM, accuracy, and interactive feedback. No login needed — just start typing!" />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/typing-test-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+<link rel="canonical" href="https://toolaroo.free.nf/typing-test/index.html" />
+    <title>Typing Trainer - Simple and fast.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f4f4f4;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        header {
+            width: 100%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 30px; 
+            height: 30px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+
+        /* Typing Trainer Styles */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+    
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .container {
+            background: #222;
+            color: white;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        #story {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            height: 20vh;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode #story {
+            background: #333;
+            color: white;
+            border-color: #555;
+        }
+        #story span.correct {
+            color: green;
+        }
+        #story span.incorrect {
+            color: red;
+            text-decoration: underline;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            color: black;
+            transition: 0.2s;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: none;
+}
+        body.dark-mode textarea {
+            background: #333;
+            color: white;
+            border-color: #555;
+        }
+        textarea.error {
+            border: 2px solid red;
+            color: red;
+        }
+        body.dark-mode textarea.error {
+            border: 2px solid red;
+            color: red;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+            padding: 15px 10px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode .stats {
+            background-color: #333;
+            color: white;
+            border-color: #555;
+        }
+        .stats p {
+            margin: 0;
+            padding: 0 10px;
+            color: #333;
+        }
+        body.dark-mode .stats p {
+            color: white;
+        }
+        .stats span {
+            color: #007bff;
+        }
+        
+        
+        
+        
+        
+        
+        
+                
+   /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/typing-test.png" alt="Logo">
+            Typing Trainer
+        </div>
+        <div class="right-header">
+                           <!--share btn-->     
+        <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  font-size: 24px; /* optional: adjust size */
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+            <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        <a href="#" onclick="openContact()">Contact</a>
+    </div>
+
+    <div class="container">
+        
+        <div id="story">Loading story...</div>
+        <textarea id="input" placeholder="Start typing..." disabled></textarea>
+        <div class="stats">
+            <p>Time: <span id="timer">0</span>s</p>
+            <p>WPM: <span id="wpm">0</span></p>
+            <p>Accuracy: <span id="accuracy">100</span>%</p>
+        </div>
+    </div>
+
+    <audio id="errorSound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+        
+    
+<!--ad start 336 280-->
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <!--ad end-->  
+    
+    <br>
+     
+    
+    <div id="toolLinks">
+    <h2>Quick Navigation</h2>
+    <ul>
+        <li><a href="../index.html">Go to Home</a></li>
+    </ul>
+
+    <h3>Also Check:</h3>
+    <ul>
+        <li><a href="../calculator/index.html">Online Calculator</a></li>
+        
+        <li><a href="../color-picker/index.html">Color Picker</a></li>
+        <li><a href="../qr-generator/index.html">QR Code Generator</a></li>
+        <li><a href="../qr-scanner/index.html">QR Code Scanner</a></li>
+        <li><a href="../image-crop/index.html">Image Cropper</a></li>
+        <li><a href="../morse-generator/index.html">Morse Code Converter</a></li>
+        <li><a href="../sga-generator/index.html">SGA (Minecraft) Generator</a></li>
+        <li><a href="../all-characters/index.html">All Characters & Symbols</a></li>
+        <li><a href="../what-is-my-ip/index.html">What's My IP</a></li>
+    </ul>
+
+    <h3>Visit Other Toolaroo Pages:</h3>
+    <ul>
+        <li><a href="../sites/FAQs.html">FAQs</a></li>
+        <li><a href="../sites/privacy.html">Privacy Policy</a></li>
+        <li><a href="../sites/terms.html">Terms of Use</a></li>
+        
+    </ul>
+</div>
+
+    <script>
+        // Typing Trainer Script
+        const storyEl = document.getElementById('story');
+        const input = document.getElementById('input');
+        const timerEl = document.getElementById('timer');
+        const wpmEl = document.getElementById('wpm');
+        const accuracyEl = document.getElementById('accuracy');
+        const errorSound = document.getElementById('errorSound');
+
+        let storyText = '';
+        let timer = 0;
+        let interval;
+        let started = false;
+        let lastErrorIndex = -1;
+
+        function renderStory(highlightIndex, errorIndex = null) {
+            storyEl.innerHTML = '';
+            for (let i = 0; i < storyText.length; i++) {
+                const span = document.createElement('span');
+                span.textContent = storyText[i];
+                if (i < highlightIndex) {
+                    span.classList.add('correct');
+                } else if (i === errorIndex) {
+                    span.classList.add('incorrect');
+                }
+                storyEl.appendChild(span);
+            }
+
+            const currentSpan = storyEl.children[highlightIndex] || storyEl.lastChild;
+            if (currentSpan) {
+                currentSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function calculateStats(correctChars, totalTyped) {
+            const minutes = timer / 60;
+            const wpm = Math.floor((correctChars / 5) / minutes) || 0;
+            const accuracy = Math.floor((correctChars / totalTyped) * 100) || 100;
+            wpmEl.textContent = wpm;
+            accuracyEl.textContent = accuracy;
+        }
+
+        input.addEventListener('input', () => {
+            const typed = input.value;
+
+            if (!started && typed.length > 0) {
+                started = true;
+                interval = setInterval(() => {
+                    timer++;
+                    timerEl.textContent = timer;
+                }, 1000);
+            }
+
+            let correctUpto = 0;
+            let errorAt = null;
+
+            for (let i = 0; i < typed.length; i++) {
+                if (typed[i] === storyText[i]) {
+                    correctUpto++;
+                } else {
+                    errorAt = i;
+                    break;
+                }
+            }
+
+            if (errorAt !== null) {
+                input.classList.add('error');
+                if (errorAt !== lastErrorIndex) {
+                    navigator.vibrate?.(100);
+                    errorSound.currentTime = 0;
+                    errorSound.play();
+                    lastErrorIndex = errorAt;
+                }
+            } else {
+                input.classList.remove('error');
+                lastErrorIndex = -1;
+            }
+
+            renderStory(correctUpto, errorAt);
+            calculateStats(correctUpto, typed.length);
+        });
+
+        function loadRandomStory() {
+            const randomNum = Math.floor(Math.random() * 10) + 1;
+            const fileName = `story${randomNum}.txt`;
+
+            fetch(fileName)
+                .then(response => {
+                    if (!response.ok) throw new Error("Story not found");
+                    return response.text();
+                })
+                .then(text => {
+                    storyText = text.trim();
+                    renderStory(0);
+                    input.disabled = false;
+                    input.focus();
+                })
+                .catch(err => {
+                    storyEl.textContent = "Failed to load story.";
+                    console.error(err);
+                });
+        }
+
+        loadRandomStory();
+
+        // Template Scripts
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.innerText = "☀️";  
+            } else {
+                icon.innerText = "🌙";  
+            }
+        }
+
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+    </script>
+    
+    
+    <div class="info-section", style="padding:10px;">
+    <style>
+        .info-section h1 {
+            text-align: left;
+            font-size: 26px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .info-section p {
+            text-align: left;
+            margin-left:10px;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 15px;
+        }
+
+        .info-section ul {
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .info-section li {
+            text-align: left;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        body.dark-mode .info-section h1 {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .info-section p,
+        body.dark-mode .info-section li {
+            color: #ddd;
+        }
+    </style>
+
+    <h1>Welcome to Typing Trainer</h1>
+    <p>
+        Practice typing through fun and simple stories! This trainer helps you increase speed and accuracy while enjoying short tales designed especially for beginners and kids.
+    </p>
+
+    <h1>Why Typing Trainer?</h1>
+    <p>
+        Unlike boring typing tools, this trainer keeps you hooked with real stories. Each story is easy to read and perfect for young learners or anyone starting out.
+    </p>
+    <ul>
+        <li>Child-friendly vocabulary</li>
+        <li>Live typing feedback and scroll</li>
+        <li>Error sound and vibration on mistakes</li>
+        <li>Real-time WPM and accuracy tracking</li>
+    </ul>
+
+    <h1>Included Stories</h1>
+    <ul>
+        <li>The Lion and the Mouse</li>
+        <li>The Tortoise and the Hare</li>
+        <li>The Ant and the Grasshopper</li>
+        <li>The Fox and the Grapes</li>
+        <li>The Boy Who Cried Wolf</li>
+        <li>The Dog and His Shadow</li>
+        <li>The Town Mouse and the Country Mouse</li>
+        <li>The Frog and the Ox</li>
+        <li>The Wolf in Sheep's Clothing</li>
+        <li>The Fox and the Crow</li>
+    </ul>
+
+    <h1>How to Use</h1>
+    <p>
+        Click on the typing area and start typing the story shown above. As you type, the text scrolls automatically. You’ll get instant feedback for errors, and your WPM and accuracy will update live.
+    </p>
+
+    <h1>FAQs</h1>
+    <p><strong>Q: Is this tool kid-friendly?</strong><br>
+    Yes! All stories use simple English and are short (80–90 words only).</p>
+
+    <p><strong>Q: Do I need to sign up?</strong><br>
+    Nope. Just open the site and start typing!</p>
+
+    <p><strong>Q: Does it work on mobile?</strong><br>
+    Absolutely! It's built for both desktop and mobile.</p>
+
+    <h1>Creator of the Website</h1>
+  <p>
+  Hi there! I’m <strong>Manir</strong>. I love creating fun and educational tools for curious minds like yours. I built this little project with a lot of love and creativity—hope you enjoy using it as much as I enjoyed making it! 
+  Wanna see more of my work? Follow me on Instagram: 
+  <a href="https://instagram.com/artistry_with_manir___" target="_blank">@artistry_with_manir___</a>
+</p>
+    <h1>Start Typing Now!</h1>
+    <p>
+        Learn, type, and grow your skills — all while having fun. Let’s go!
+    </p>
+</div>
+    
+    
+ 
+ 
+ 
+ 
+     <!--footer-->
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+   
+
+</body>
+</html>

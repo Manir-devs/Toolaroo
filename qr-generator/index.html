@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="nbwXkuJrrll9y4Z8_Yk3HhxhkOMNVdD0xunIADAJzmA" />
+    
+    
+    
+
+    <!-- Favicon and Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="title" content="QR Generator - Toolaroo's Free & Fast Text to QR Code Tool" />
+<meta name="description" content="Convert your text into QR codes instantly with Toolaroo's QR Generator. Fast, free, mobile-friendly, and no sign-ups required." />
+<meta name="keywords" content="QR generator, text to QR, free QR code tool, Toolaroo QR, QR code maker, Maniruz Zaman, online QR generator, scan text, create QR code" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph Meta for Social Sharing -->
+<meta property="og:title" content="QR Generator - Toolaroo's Free & Instant QR Code Maker" />
+<meta property="og:description" content="Easily generate QR codes from any text using Toolaroo's QR Generator. No sign-up, just fast and reliable conversion." />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/qr-generator-preview.png" />
+<meta property="og:url" content="https://toolaroo.free.nf/qr-generator" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter Card Meta -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="QR Generator - Convert Text to QR Code | Toolaroo" />
+<meta name="twitter:description" content="Toolaroo's QR Generator is your go-to tool for turning any text into a scannable QR code. Fast, free, and simple." />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/qr-generator-preview.png" />
+
+    <!-- Page Title -->
+    <title>Fast QR Generator - Toolaroo's fast, free, no sign ups</title>
+
+    <!-- External CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Toolaroo QR Generator",
+  "url": "https://toolaroo.free.nf/qr-generator",
+  "description": "Fast and free QR Generator by Toolaroo. Instantly convert any text into a scannable QR code. No sign-ups, just quick results.",
+  "author": {
+    "@type": "Person",
+    "name": "Maniruz Zaman"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://toolaroo.free.nf/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/toolaroo.png" alt="Logo">
+        </div>
+
+        <div class="right-header">
+            <!-- Share Button -->
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+
+            <!-- Dark Mode Toggle Button -->
+          <button class="icon-btn" id="themeToggleBtn" onclick="toggleDarkMode()">🌙</button>
+
+            <!-- Menu Button for Drawer -->
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <!-- Drawer Menu -->
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        <a href="#" onclick="toggleDarkMode(); toggleDrawer();"> Toggle theme</a>
+        <a href="#" onclick="openStoragePopup(); toggleDrawer();"> Local Storage</a>
+        <a href="#" onclick="reloadPage()">Reload website</a>
+        <a href="../sites/rating.html">Rate me</a>
+        <a href="#" onclick="shareCurrentPage()">Share this page</a>
+        <a href="../sites/FAQs.html">FAQs</a> 
+        <a href="../sites/terms.html">Terms & Conditions</a> 
+        <a href="../sites/privacy.html">Privacy Policy</a> 
+        <a href="../sites/support.html">Support</a>
+        <a href="#" onclick="openContact()">Contact</a>
+    </div>
+<!-- Main Content Area -->
+<div class="main-content">
+
+    <!-- Left Side: Tools Section -->
+    <div class="left-side">
+
+        <!-- Search Bar -->
+<div id="space"></div>
+ <div class="ads" >
+            <h3>Advertisement</h3>
+<iframe data-aa='2390786' src='//ad.a-ads.com/2390786?size=468x60' style='width:100%; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+
+
+
+
+        </div>
+         <div class="qr-container">
+        <input type="text" id="qrText" placeholder="Enter text to generate QR code">
+        <button onclick="generateQRCode()">Generate</button>
+        <div id="qrcode" class="qr-image"></div><br><br>
+        <a id="downloadLink" href="#" download="qrcode.png" style="display: none;">
+            <button>Download QR Code</button>
+        </a>
+        
+    </div>
+    <div id="localStorageTool">
+  <div id="storagePopup">
+    <div id="storagePopupContent">
+      <h2 style="padding:5px;  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);">LocalStorage Viewer</h2>
+      <button onclick="closeStoragePopup()" style="position:absolute; top:10px; right:10px; font-size:18px;">❌</button>
+      
+      <ul id="storageList">
+          
+      </ul>
+
+      <hr>
+      <h3>Add New Item</h3>
+      <table><tr><td>
+      <select id="newKey" style="">
+        <option>keys</option>
+        <option value="theme">theme</option>
+       
+      </select>
+      </td><td>
+      <input id="newValue" placeholder="Value" style="" />
+      </td><td>
+      <button id="add-button" onclick="addStorageItem()">Add</button>
+      </td>
+      </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+    </div> <!-- End of Left Side -->
+
+    <!-- Right Side: Info & Ads -->
+    <div class="right-side">
+
+        <!-- Ad Section -->
+        <div class="ads">
+            <h3>Advertisement</h3>
+                        
+<iframe data-aa='2390787' src='//ad.a-ads.com/2390787?size=336x280' style='width:336px; height:280px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+        </div>
+<div id="toolaroo-preloader">
+    <img src="../assets/images/preview.png" alt="Loading..." />
+</div>
+        <!-- Info Section -->
+        <div id="infoSection">
+
+            <!-- Welcome Message -->
+            <section>
+                <h1>What is QR generator?</h1>
+                <p>A QR code generator is a tool that allows users to create QR codes, which are two-dimensional barcodes that can store various types of information, such as URLs, text, or contact details. These codes can be scanned by smartphones or QR code readers to quickly access the stored information without needing to manually type anything.</p>
+            </section>
+
+<section>
+    <h2>What You Can Do on Toolaroo's QR generator:</h2>
+    <ul>
+        <li><strong>Convert Any Text to QR Code:</strong> Input any text (like a message, address, or note) and get a scannable QR code.</li>
+        <li><strong>Quick Sharing:</strong> Share the QR code with others, allowing them to view the text instantly by scanning it with their phones.</li>
+        <li><strong>No Need to Type:</strong> Instead of typing out long text, users can just scan the QR code to access the information.</li>
+        <li><strong>Simple & Easy:</strong> The tool is designed to be simple, so anyone can generate QR codes quickly without any hassle.</li>
+
+    </ul>
+</section>
+
+            <!-- About Toolaroo -->
+            <section>
+                <h2>Why QR generator?</h2>
+<p>This QR Generator is free, fast, mobile-friendly, and doesn’t ask for sign-ups. Perfect for school, office, and personal productivity. Built by <strong>Maniruz Zaman</strong> with focus on simplicity & usefulness.</p>
+
+                <h2>Explore, Convert, Calculate, Copy — All in One Place!</h2>
+                <p>We’re growing daily. Bookmark us, share with friends, and watch for updates!</p>
+            </section>
+
+            <!-- External Resources -->
+            <section>
+                <h2>Recommended Resources</h2>
+                <p>Check out these top resources:</p>
+                <ul>
+                    <li><a href="https://farmupassam.infy.uk" target="_blank" rel="nofollow">FarmUp Assam - website still in development</a></li>
+                    <li><a href="https://neilpatel.com" target="_blank" rel="nofollow">Neil Patel - Digital Marketing Blog</a></li>
+                    <li><a href="https://backlinko.com" target="_blank" rel="nofollow">Backlinko - SEO Tips & Strategies</a></li>
+                    <li><a href="https://ahrefs.com/blog" target="_blank" rel="nofollow">Ahrefs Blog - SEO & Marketing Guides</a></li>
+                    <li><a href="https://www.semrush.com/blog" target="_blank" rel="nofollow">SEMrush Blog - Marketing Insights</a></li>
+                    <li><a href="https://www.ewebdiscussion.com/forums/web-hosting-offers.67/" target="_blank" rel="nofollow">Web Hosting Offers</a></li>
+                </ul>
+            </section>
+
+        </div> <!-- End Info Section -->
+
+    </div> <!-- End Right Side -->
+
+</div> <!-- End Main Content -->
+    <!-- Footer Section -->
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://youtube.com/@toolaroo?si=KTO1SBb60QX-Q9hO" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/ManirBhaii" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/share/16NxheaJbY/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/Manir-123" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/artistry_with_manir___?igsh=cm5mYXR5ZHl4eTY3" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+</body>
+
+</html>

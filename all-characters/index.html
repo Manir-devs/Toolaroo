@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="nbwXkuJrrll9y4Z8_Yk3HhxhkOMNVdD0xunIADAJzmA" />
+    
+    
+    
+
+    <!-- Favicon and Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="title" content="All Characters - Explore 150000+ Unicode Symbols | Toolaroo" />
+<meta name="description" content="Browse and copy over 150,000 Unicode characters with Toolaroo’s All Characters tool. Instantly explore symbols, emojis, and hidden characters in one smooth interface." />
+<meta name="keywords" content="Unicode characters, All Characters, Toolaroo, copy characters, emojis, symbols, text tools, unicode explorer, online character map, character picker" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph Meta for Social Sharing -->
+<meta property="og:title" content="All Characters - Explore 150000+ Unicode Symbols | Toolaroo" />
+<meta property="og:description" content="Instantly browse and copy any Unicode character. Toolaroo’s All Characters tool makes exploring the entire Unicode set smooth, free, and fast!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/all-characters-preview.png" />
+<meta property="og:url" content="https://toolaroo.free.nf/all-characters" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter Card Meta -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="All Characters - Unicode Explorer by Toolaroo" />
+<meta name="twitter:description" content="Explore all Unicode characters with Toolaroo's powerful and free All Characters tool. No ads, no sign-up." />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/all-characters-preview.png" />
+
+    <!-- Page Title -->
+    <title>All Characters - Toolaroo</title>
+
+    <!-- External CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "All Characters - Unicode Explorer | Toolaroo",
+  "url": "https://toolaroo.free.nf/all-characters",
+  "description": "Toolaroo's All Characters tool lets you browse and copy over 150,000 Unicode characters. Explore emojis, symbols, scripts, and hidden gems in one clean interface.",
+  "author": {
+    "@type": "Person",
+    "name": "Maniruz Zaman"
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Toolaroo",
+    "url": "https://toolaroo.free.nf/"
+  }
+}
+</script>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/toolaroo.png" alt="Logo">
+        </div>
+
+        <div class="right-header">
+            <!-- Share Button -->
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+
+            <!-- Dark Mode Toggle Button -->
+           <button class="icon-btn" id="themeToggleBtn" onclick="toggleDarkMode()">🌙</button>
+
+            <!-- Menu Button for Drawer -->
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <!-- Drawer Menu -->
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+        <a href="#" onclick="toggleDarkMode(); toggleDrawer();"> Toggle theme</a>
+        
+        
+        
+        
+        
+        <a href="#" onclick="openStoragePopup(); toggleDrawer();"> Local Storage</a>
+        
+        
+        
+        
+        <a href="#" onclick="reloadPage()">Reload website</a>
+        <a href="../sites/rating.html">Rate me</a>
+        <a href="#" onclick="shareCurrentPage()">Share this page</a>
+        <a href="../sites/FAQs.html">FAQs</a> 
+        <a href="../sites/terms.html">Terms & Conditions</a> 
+        <a href="../sites/privacy.html">Privacy Policy</a> 
+        <a href="../sites/support.html">Support</a>
+        <a href="#" onclick="openContact()">Contact</a>
+    </div>
+<!-- Main Content Area -->
+<div class="main-content">
+
+    <!-- Left Side: Tools Section -->
+    <div class="left-side">
+
+        <!-- Search Bar -->
+<div id="space"></div>
+ <div class="ads" >
+            <h3>Advertisement</h3>
+            
+<iframe data-aa='2394070' src='//ad.a-ads.com/2394070?size=468x60' style='width:100%; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+
+
+
+        </div>
+        <!-- Tool Cards Container -->
+        
+ <div id="inputThread">            
+<thead>
+  <tr>
+    <th><input type="text" id="charSearch" placeholder="Character"></th>
+    <th><input type="number" id="codeSearch" placeholder="Decimal Code"></th>
+    
+  </tr>
+</thead>
+</div>
+        <div id="maincontainer">
+            
+    <table>
+        
+        <thead>
+            <tr>
+                <th>Character</th>
+                <th>Decimal Code</th>
+                <th>Copy</th>
+            </tr>
+        </thead>
+        <tbody id="characterList"></tbody>
+    </table>
+      </div>  
+        
+        
+
+<div id="localStorageTool">
+  <div id="storagePopup">
+    <div id="storagePopupContent">
+      <h2 style="padding:5px;  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);">LocalStorage Viewer</h2>
+      <button onclick="closeStoragePopup()" style="position:absolute; top:10px; right:10px; font-size:18px;">❌</button>
+      
+      <ul id="storageList">
+          
+      </ul>
+
+      <hr>
+      <h3>Add New Item</h3>
+      <table><tr><td>
+      <select id="newKey" style="">
+        <option>keys</option>
+        <option value="theme">theme</option>
+       
+      </select>
+      </td><td>
+      <input id="newValue" placeholder="Value" style="" />
+      </td><td>
+      <button id="add-button" onclick="addStorageItem()">Add</button>
+      </td>
+      </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+    </div> <!-- End of Left Side -->
+
+    <!-- Right Side: Info & Ads -->
+    <div class="right-side">
+
+        <!-- Ad Section -->
+        <div class="ads">
+            <h3>Advertisement</h3>
+                        
+<iframe data-aa='2394072' src='//ad.a-ads.com/2394072?size=336x280' style='width:336px; height:280px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+        </div>
+<div id="toolaroo-preloader">
+    <img src="../assets/images/preview.png" alt="Loading..." />
+</div>
+        <!-- Info Section -->
+        <div id="infoSection">
+
+            <!-- Welcome Message -->
+            <section>
+                <h1>What is All Characters on  Toolaroo?</h1>
+                <p>All Characters on Toolaroo is a powerful tool that lets you explore the full range of Unicode characters — from decimal 0 to 150,000+. Whether you're a developer, designer, or just curious, this tool gives you instant access to symbols, emojis, letters from every language, and more. It's perfect for finding special characters or discovering hidden gems in the Unicode world.</p>
+            </section>
+
+<section>
+<h2>What You Can Do on Toolaroo's All Characters:</h2>
+<ul>
+    <li><strong>Explore Unicode:</strong> Browse over 150,000 Unicode characters easily</li>
+    <li><strong>Copy Instantly:</strong> Click any character to copy it instantly</li>
+    <li><strong>Search Anything:</strong> Find symbols, emojis, letters, or hidden characters</li>
+    <li><strong>Know the Code:</strong> See each character’s decimal, hex, and Unicode info</li>
+    <li><strong>No Limits:</strong> Scroll freely from code point 0 to beyond 150,000</li>
+    <li><strong>Mobile Friendly:</strong> Use it smoothly on any device</li>
+    <li><strong>Fast & Free:</strong> No sign-up, no ads, just pure utility</li>
+</ul>
+</section>
+
+            <!-- About Toolaroo -->
+            <section>
+                <h2>Why Toolaroo?</h2>
+                <p>Toolaroo is free, fast, mobile-friendly, and doesn’t ask for sign-ups. Perfect for school, office, and personal productivity. Built by <strong>Maniruz Zaman</strong> with focus on simplicity & usefulness.</p>
+
+                <h2>Explore, Convert, Calculate, Copy — All in One Place!</h2>
+                <p>We’re growing daily. Bookmark us, share with friends, and watch for updates!</p>
+            </section>
+
+            <!-- External Resources -->
+            <section>
+                <h2>Recommended Resources</h2>
+                <p>Check out these top resources:</p>
+                <ul>
+                    <li><a href="https://farmupassam.infy.uk" target="_blank" rel="nofollow">FarmUp Assam - website still in development</a></li>
+                    <li><a href="https://neilpatel.com" target="_blank" rel="nofollow">Neil Patel - Digital Marketing Blog</a></li>
+                    <li><a href="https://backlinko.com" target="_blank" rel="nofollow">Backlinko - SEO Tips & Strategies</a></li>
+                    <li><a href="https://ahrefs.com/blog" target="_blank" rel="nofollow">Ahrefs Blog - SEO & Marketing Guides</a></li>
+                    <li><a href="https://www.semrush.com/blog" target="_blank" rel="nofollow">SEMrush Blog - Marketing Insights</a></li>
+                    <li><a href="https://www.ewebdiscussion.com/forums/web-hosting-offers.67/" target="_blank" rel="nofollow">Web Hosting Offers</a></li>
+                </ul>
+            </section>
+
+        </div> <!-- End Info Section -->
+
+    </div> <!-- End Right Side -->
+
+</div> <!-- End Main Content -->
+    <!-- Footer Section -->
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://youtube.com/@toolaroo?si=KTO1SBb60QX-Q9hO" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://x.com/ManirBhaii" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/share/16NxheaJbY/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/Manir-123" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/artistry_with_manir___?igsh=cm5mYXR5ZHl4eTY3" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+             <!-- Standard favicon in .ico format -->
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="manifest" href="../assets/site.webmanifest">
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <!-- Primary Meta Tags -->
+<title>Image Crop Tool - Simple Online Image Cropper | Toolaroo</title>
+<meta name="title" content="Image Crop Tool - Simple Online Image Cropper | Toolaroo" />
+<meta name="description" content="Crop your images quickly and easily with Toolaroo's free Image Crop tool. No login, no extra steps — just upload, crop, and download. Fast and minimal interface!" />
+<meta name="keywords" content="image crop, crop tool, image cropper, online crop tool, crop photo, crop image online, simple image crop, toolaroo crop tool, toolaroo image tools, free image cropper, crop png, crop jpg, photo editor, quick crop, minimal cropper, image cutter, manir, manir tools, manirbhaii, crop image, online image editor, toolaroo" />
+<meta name="author" content="Maniruz Zaman" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toolaroo.free.nf/image-crop/index.html" />
+<meta property="og:title" content="Image Crop Tool - Simple Online Image Cropper | Toolaroo" />
+<meta property="og:description" content="Toolaroo’s online image cropper helps you crop any image in seconds. Just drag, adjust, and save — no complications!" />
+<meta property="og:image" content="https://toolaroo.free.nf/assets/images/image-crop-preview.png" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://toolaroo.free.nf/image-crop/index.html" />
+<meta name="twitter:title" content="Image Crop Tool - Simple Online Image Cropper | Toolaroo" />
+<meta name="twitter:description" content="Fast and easy image crop tool by Toolaroo. Upload an image, crop it, and download — all free with a clean UI." />
+<meta name="twitter:image" content="https://toolaroo.free.nf/assets/images/image-crop-preview.png" />
+
+<!-- Additional SEO Enhancements -->
+
+<link rel="canonical" href="https://toolaroo.free.nf/image-crop/index.html" />
+    
+    
+    
+    
+    
+    
+    
+    <title>Toolaroo Image Crop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f4f4f4;
+            color: black;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        header {
+            width: 100%;
+            background-color: #fff;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode header {
+            background-color: #222;
+            color: white;
+        }
+        .left-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .left-header img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        body.dark-mode .icon-btn {
+            color: white;
+        }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .drawer {
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            color: black;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            transition: 0.3s;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+        body.dark-mode .drawer {
+            background-color: #222;
+        }
+        .drawer.open {
+            right: 0;
+        }
+        .drawer a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s;
+        }
+        body.dark-mode .drawer a {
+            color: white;
+        }
+        .drawer a:hover {
+            color: #4CAF50;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 20px;
+            text-align: right;
+            cursor: pointer;
+        }
+        body.dark-mode .close-btn {
+            color: white;
+        }
+
+        /* Image Cropper Styles */
+        #upload-container {
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            border: 2px dashed #555;
+            padding: 25px;
+            background: #f4f4f4;
+            color: black;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+        body.dark-mode #upload-container {
+            background: #222;
+            color: white;
+            border-color: #555;
+        }
+        #upload-container:hover { background: #e0e0e0; }
+        body.dark-mode #upload-container:hover { background: #2a2a2a; }
+        #image-preview {
+            display: none;
+            max-width: 100%;
+            max-height: 70vh;
+            border: 1px solid white;
+            border-radius: 8px;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            justify-content: center;
+        }
+        .controls button {
+            padding: 12px 18px;
+            background: #ff5e00;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .controls button:hover { background: #ff7700; }
+        #cropBtn, #applyCropBtn, #downloadBtn, #resetBtn { display: none; }
+        
+        
+   /*footer*/     
+        
+        
+        .site-footer {
+    width: 100%;
+    background-color: #eee;
+    padding: 25px 15px;
+    text-align: center;
+    font-size: 13px;
+    color: #444;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer .footer-links {
+    margin-bottom: 10px;
+}
+
+.site-footer .footer-links a {
+    margin: 0 8px;
+    font-size: 10px;
+    color: #050;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.site-footer .footer-links a:hover {
+    color: #4CAF50;
+    text-decoration: underline;
+}
+
+.site-footer p {
+    max-width: 600px;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Dark mode styles */
+body.dark-mode .site-footer {
+    background-color: #1e1e1e;
+    color: #ccc;
+}
+
+body.dark-mode .site-footer .footer-links a {
+    color: #0f0;
+}
+
+body.dark-mode .site-footer .footer-links a:hover {
+    color: #4CAF50;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="left-header">
+            <img src="../assets/images/crop.png"alt="image crop">
+            Image Crop
+        </div>
+        <div class="right-header">
+               <!--share btn-->     
+        <head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head>
+        <style>
+            .right-header button.material-icons {
+  background: transparent;
+  border: none;
+  color: orange;
+  font-size: 24px; /* optional: adjust size */
+  cursor: pointer;
+  outline: none;
+}
+        </style>
+<script>
+  function shareCurrentPage() {
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: "Check this out!",
+        url: window.location.href
+      }).catch((error) => console.log('Sharing failed:', error));
+    } else {
+      alert("Web Share API is not supported in this browser.");
+    }
+  }
+</script>
+        <div class="right-header">  
+            <button class="material-icons" onclick="shareCurrentPage()">share</button>
+<!--share btn end-->
+            <button class="icon-btn" onclick="toggleDarkMode()">🌙</button>
+            <button class="icon-btn menu-icon" onclick="toggleDrawer()">☰</button>
+        </div>
+    </header>
+
+    <div class="drawer" id="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">✖</button>
+        <a href="../index.html">Home</a>
+
+        <a href="#" onclick="openContact()">Contact</a>
+    </div><br>
+    
+    
+    
+<!--ad start 320 100-->   
+    
+    
+
+
+
+
+
+
+
+
+
+<!--ad end-->
+
+
+
+    <!-- Image Cropper Section -->
+    <div id="upload-container" onclick="document.getElementById('file-input').click()">
+        <p>Click or Drag & Drop to Upload Image</p>
+        <input type="file" id="file-input" accept="image/*" style="display: none">
+    </div>
+    <img id="image-preview">
+    <div class="controls">
+        <button id="cropBtn" onclick="startCrop()">Crop</button>
+        <button id="applyCropBtn" onclick="applyCrop()">Apply</button>
+        <button id="downloadBtn" onclick="downloadImage()">Download</button>
+        <button id="resetBtn" onclick="reset()">Reset</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script>
+        function toggleDrawer() {
+            document.getElementById("drawer").classList.toggle("open");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector(".icon-btn");
+            icon.innerText = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+        }
+
+        
+
+        function openContact() {
+            window.open("https://instagram.com/artistry_with_manir___", "_blank");
+        }
+
+        let imagePreview = document.getElementById('image-preview');
+        let fileInput = document.getElementById('file-input');
+        let uploadContainer = document.getElementById('upload-container');
+        let cropper = null;
+
+        fileInput.addEventListener('change', function(event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadContainer.style.display = 'none';
+                    document.getElementById('cropBtn').style.display = 'inline-block';
+                    document.getElementById('resetBtn').style.display = 'inline-block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function startCrop() {
+            if (cropper) { cropper.destroy(); }
+            cropper = new Cropper(imagePreview, { aspectRatio: NaN, viewMode: 0 });
+            document.getElementById('applyCropBtn').style.display = 'inline-block';
+        }
+
+        function applyCrop() {
+            let croppedCanvas = cropper.getCroppedCanvas();
+            imagePreview.src = croppedCanvas.toDataURL();
+            document.getElementById('downloadBtn').style.display = 'inline-block';
+            cropper.destroy();
+        }
+
+        function downloadImage() {
+            let link = document.createElement('a');
+            link.href = imagePreview.src;
+            link.download = 'cropped-image.png';
+            link.click();
+        }
+
+        function reset() {
+            imagePreview.src = '';
+            imagePreview.style.display = 'none';
+            uploadContainer.style.display = 'block';
+            document.getElementById('cropBtn').style.display = 'none';
+            document.getElementById('applyCropBtn').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
+            document.getElementById('resetBtn').style.display = 'none';
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+        }
+    </script>
+    
+ 
+ 
+    
+<!--ad start 336 280-->
+
+
+
+
+
+    
+  <!--ad end-->
+  
+  
+  
+    <br>
+      
+    <div id="toolLinks">
+    <h2>Quick Navigation</h2>
+    <ul>
+        <li><a href="../index.html">Go to Home</a></li>
+    </ul>
+
+    <h3>Also Check:</h3>
+    <ul>
+        <li><a href="../binary-translator/index.html">Binary Translator</a></li>
+        
+        <li><a href="../color-picker/index.html">Color Picker</a></li>
+        <li><a href="../qr-generator/index.html">QR Code Generator</a></li>
+        <li><a href="../qr-scanner/index.html">QR Code Scanner</a></li>
+        <li><a href="../calculator/index.html">Calculator</a></li>
+        <li><a href="../morse-generator/index.html">Morse Code Converter</a></li>
+        <li><a href="../sga-generator/index.html">SGA (Minecraft) Generator</a></li>
+        <li><a href="../all-characters/index.html">All Characters & Symbols</a></li>
+         <li><a href="../what-is-my-ip/index.html">What's My IP</a></li>
+    </ul>
+
+    <h3>Visit Other Toolaroo Pages:</h3>
+    <ul>
+        <li><a href="../sites/FAQs.html">FAQs</a></li>
+        <li><a href="../sites/privacy.html">Privacy Policy</a></li>
+        <li><a href="../sites/terms.html">Terms of Use</a></li>
+        
+    </ul>
+</div>
+
+<style>
+#toolLinks a {
+    color: var(--link-color, #4d9fa3); /* light blue as default */
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+#toolLinks a:hover {
+    color: var(--link-hover-color, #82c7ff); /* lighter on hover */
+}
+
+/* Optional: set default fallback for older browsers */
+body.dark-theme #toolLinks a {
+    color: #82c7ff;
+}
+body.dark-theme #toolLinks a:hover {
+    color: #ffffff;
+}
+body.light-theme #toolLinks a {
+    color: #0044cc;
+}
+body.light-theme #toolLinks a:hover {
+    color: #0066ff;
+}
+</style>
+     
+ 
+ 
+ 
+    
+    
+    
+    
+    
+    <div id="imageCropSection">
+    <h1>Free Online Image Cropper — Crop Photos Instantly</h1>
+    <p>Toolaroo’s online image cropper lets you crop images quickly and easily, right from your browser. No downloads, no sign-ups — just upload an image, select the area you want, and crop it in seconds. Whether you're editing photos for school, work, or social media, this simple tool gets the job done.</p>
+
+    <h2>Features of Our Online Image Crop Tool:</h2>
+    <ul>
+        <li><strong>Fast Cropping:</strong> Upload your image and crop with a simple drag-to-select interface</li>
+        <li><strong>Works on All Devices:</strong> Mobile, tablet, or desktop — crop images from anywhere</li>
+        <li><strong>Privacy First:</strong> Your images never leave your device — everything happens locally</li>
+        <li><strong>Basic and Lightweight:</strong> No unnecessary features, just pure cropping simplicity</li>
+        <li><strong>One-Click Download:</strong> Instantly save your cropped image with one tap</li>
+        <li><strong>No Ads or Clutter:</strong> A clean, focused tool for fast image editing</li>
+    </ul>
+
+    <h2>Why Use Toolaroo’s Image Cropper?</h2>
+    <p>Unlike complicated photo editors or ad-filled websites, Toolaroo’s cropper is built for simplicity. It’s ideal for users who just want to crop an image and move on — no distractions, no loading delays, and no hidden steps. Just upload, crop, download — that’s it.</p>
+
+    <p>Whether you’re trimming a photo for a presentation, removing unwanted edges, or cropping to fit a specific layout, this free tool helps you do it fast without any hassle.</p>
+
+    <h2>Crop Images Online Without Any App</h2>
+    <p>Toolaroo’s image cropper works entirely in your browser, so there’s nothing to install. It’s lightweight, efficient, and supports common image formats like JPG, PNG, and more. Try it out now and crop your images the easy way.</p>
+
+    <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+        Designed and powered by <strong>Toolaroo</strong> — your ultimate free online tools hub.
+    </p>
+</div>
+
+<style>
+#imageCropSection {
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: transparent;
+    color: inherit;
+    text-align: left;
+}
+
+#imageCropSection h1, #imageCropSection h2 {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+#imageCropSection ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+#imageCropSection li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+</style>
+    
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="../sites/FAQs.html">FAQs</a> |
+        <a href="../sites/terms.html">Terms & Conditions</a> |
+        <a href="../sites/privacy.html">Privacy Policy</a> |
+        <a href="../sites/support.html">Support</a>
+    </div>
+    <p>Toolaroo is a collection of simple, useful tools built for everyday use. We aim to keep everything lightweight, fast, and accessible.</p>
+    <p>&copy; 2025 Toolaroo. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>
